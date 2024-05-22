@@ -26,3 +26,5 @@ You may have to Uncomment line 4, remove # from [docker-compose.yml](https://git
 Use solely for reference material only
 
 ## Adjustment by me
+
+## Sulaimon Ekundayo
