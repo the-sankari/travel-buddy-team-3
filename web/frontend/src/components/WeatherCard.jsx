@@ -1,6 +1,6 @@
 import { getWeather } from "../services/weatherService";
 
-const WeatherCard = () => {
+const WeatherCard = (weather) => {
   return (
     <>
       <div>WeatherCard</div>

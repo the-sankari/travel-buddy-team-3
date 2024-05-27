@@ -31,9 +31,67 @@
   text-align: center;
 }
 
-
-
 /* Search Box Component  */
-.search-container{
-  width: 40%;
+/* .search-container {
+  min-width: 40%;
+} */
+
+/* Trip Planner */
+
+.trip-planner {
+  height: 85vh;
+  width: 100%;
+  background-color: #777;
+  display: flex;
+}
+.left {
+  width: 50%;
+  background-color: #555;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px;
+  .searchbox-current-weather{
+    display: flex;
+    width: 100%;
+    min-height: 200px;
+    .searchbox-card{
+      flex: 3;
+      align-self: center;
+      justify-self: center;
+      background-color: #fffff0;
+      padding: 20px;
+      border-radius: 5px;
+    }
+    .current-weather{
+      flex: 1;
+      text-align: center;
+      padding-top: 20px;
+      color: #fffff0;
+    }
+  }
+
+
+}
+
+
+.weather-forecast,.itinerary-planner{
+  width: 100%;
+  padding: 10px;
+  background-color: #fffff0;
+  margin:20px;
+  border-radius: 5px;
+  img{
+    width: 100%;
+
+  }
+}
+
+.destination-card {
+  width: 50%;
+  height: 100%;
+  background-color: gray;
+  img{
+    width: 100%;
+  }
 }

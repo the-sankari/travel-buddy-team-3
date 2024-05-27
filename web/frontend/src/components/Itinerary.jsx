@@ -9,23 +9,31 @@ const Itinerary = () => {
   };
 
   return (
-    <div>
+    <div className="container">
       <h2>Plan Your Trip</h2>
-      <input
-        type="text"
-        placeholder="Add an activity"
-        onKeyDown={(e) => {
-          if (e.key === "Enter" && e.target.value) {
-            addActivity(e.target.value);
-            e.target.value = "";
-          }
-        }}
-      />
-      <ul>
+      <ul className="list-group">
         {itinerary.map((activity, index) => (
-          <li key={index}>{activity}</li>
+          <li className="list-group-item" key={index}>
+            {index + 1}. {activity}
+          </li>
         ))}
       </ul>
+      
+      <div className="form-floating">
+        <input
+          className="form-control"
+          id="floatingInput"
+          type="text"
+          placeholder="Add an activity"
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && e.target.value) {
+              addActivity(e.target.value);
+              e.target.value = "";
+            }
+          }}
+        />
+        <label htmlFor="floatingInput">Add an activity</label>
+      </div>
     </div>
   );
 };
