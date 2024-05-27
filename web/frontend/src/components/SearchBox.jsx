@@ -26,19 +26,57 @@ const SearchBox = () => {
   };
 
   return (
-    <div>
+    <div className="container search-container">
       <form action="">
-        <input
-          type="text"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          placeholder="Search for a destination"
-        />
-        <button onClick={handleSearch}>Search</button>
-
-        <br />
-        <input type="date" id="startDate" name="startDate"></input>
-        <input type="date" id="endDate" name="endDate"></input>
+        <div className="input-group mb-3">
+          <input
+            type="text"
+            className="form-control"
+            aria-label="Recipient's username"
+            aria-describedby="button-addon2"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder="Search for a destination"
+          />
+          <button
+            className="btn btn-outline-secondary"
+            type="button"
+            id="button-addon2"
+            onClick={handleSearch}
+          >
+            Search
+          </button>
+        </div>
+        <div className="row">
+          <div className="input-group col mb-3">
+            <span className="input-group-text" id="basic-addon1">
+              From
+            </span>
+            <input
+              type="date"
+              id="startDate"
+              name="startDate"
+              className="form-control"
+              placeholder="Username"
+              aria-label="Username"
+              aria-describedby="basic-addon1"
+            />
+          </div>
+          <div className="input-group col mb-3">
+            <span className="input-group-text" id="basic-addon1">
+              To
+            </span>
+            <input
+              type="date"
+              id="endDate"
+              name="endDate"
+              className="form-control"
+              placeholder="Username"
+              aria-label="Username"
+              aria-describedby="basic-addon1"
+            />
+          </div>
+        </div>
       </form>
     </div>
   );
