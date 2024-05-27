@@ -1,35 +1,80 @@
-# Symfony-MAMP
+# Travel Itinerary Planner
 
-Symfony-MAMP is a set of docker images that include Starter-Kit for a MAMP stack ([Symfony6](https://symfony.com/), [macOS](https://www.apple.com/macos/monterey/), [Apache](https://www.apache.org/), [MySQL](https://www.mysql.com/), [PHP8](https://www.php.net/) and [phpMyAdmin](https://www.phpmyadmin.net/)) all in one handy package.
+## Short Description
 
----
+This project is about planning a travel itinerary. It allows travellers to plan their trips by providing an interactive map, weather data also other useful features including currencies of the destination countries and creating a todo list of the things . The target group includes travellers who want to organize their travel plans efficiently. This project was created to help travelers have a seamless and enjoyable planning experience.
 
-## Using the image
+## Technologies Used
 
-## Installation
+Built with:
+- HTML
+- JavaScript
+- CSS
+- Bootstrap
+- React.js
+- Symfony (for backend logic)
+- Mapbox GL JS (for interactive maps)
+- OpenWeatherMap API (for weather data)
+- RestCountries (for the country name, currency)
 
-```shell
-git clone Symfony-MAMP
-cd Symfony-MAMP
-cp .env.example .env && cp web/.env.example web/.env
-docker-compose up --build
-```
+## Setup and Usage
 
-- Symfony 6 will run on [http://localhost:8007](http://localhost:8007)
-- phpMyAdmin will run on [http://localhost:9082](http://localhost:9082)
+To get started with this project, follow these steps:
 
-### Optional: Apple M1 Chip
+1. **Clone the repository:**
+    ```bash
+    git clone https://github.com/..../....
+    cd ....
+    ```
 
-You may have to Uncomment line 4, remove # from [docker-compose.yml](https://github.com/kalwar/Symfony-MAMP/blob/main/docker-compose.yml#L4) file
+2. **Install dependencies:**
+    ```bash
+    composer install
+    npm install
+    ```
 
-# Use for reference
+3. **Set up environment variables:**
+    Create a `.env.local` file and add your Mapbox and OpenWeatherMap API keys:
+    ```env
+    MAPBOX_API_KEY=your_mapbox_api_key
+    WEATHER_API_KEY=your_openweathermap_api_key
+    
+    ```
 
-Use solely for reference material only
+4. **Run the Symfony server:**
+    ```bash
+    symfony server:start
+    ```
 
-## Adjustment by me
+5. **Build assets:**
+    ```bash
+    npm run dev
+    ```
 
-## Sulaimon Ekundayo
+6. **Access the application:**
+    Open your browser and navigate to `http://localhost:8000/map`.
 
-## Twig template
+## Live Page
 
-addition by tuomas
+You can view the live project here: [Live Page](http://.....com)
+
+## Screenshot
+
+![Screenshot of the Project](path/to/screenshot.png)
+
+## Sources
+
+- [GitHub Guides - Mastering Markdown](https://guides.github.com/features/mastering-markdown/)
+- [Make a README](https://www.makeareadme.com/)
+
+## Authors and Acknowledgments
+
+- **Kajol Sutra Dhar**
+- GitHub: [@the-sankari](https://https://github.com/the-sankari)
+- **Tuomas Kohvakka**
+- GitHub: [@tauoms](https://https://github.com/tauoms)
+- **Sulaimon Ekundayo**
+- GitHub: [@ekundayoSO](https://github.com/ekundayoSO)
+- **Bishnu Suyel**
+- GitHub: [@Bis10](https://github.com/Bis10)
+  
