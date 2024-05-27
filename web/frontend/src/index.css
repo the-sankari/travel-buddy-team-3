@@ -1,0 +1,32 @@
+.guide-card-group {
+  box-shadow: 0 0 2px #777;
+  position: relative;
+}
+
+.guide-card-image {
+  width: 80%;
+  align-self: center;
+  padding-bottom: 20px;
+}
+
+.guide-card {
+  border: none;
+}
+.guide-close-btn {
+  position: absolute;
+  right: -20px;
+  top: -20px;
+  background-color: #777;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+.guide-card-number {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  padding: 2px;
+  color: #fefefe;
+  background-color: #999;
+  text-align: center;
+}

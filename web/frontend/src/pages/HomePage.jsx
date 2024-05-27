@@ -5,8 +5,6 @@ import Guide from "../components/Guide";
 const HomePage = () => {
   return (
     <>
-      <div>HomePage (Landing page)</div>
-      <br />
       <Guide />
     </>
   );
