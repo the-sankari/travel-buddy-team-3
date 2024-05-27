@@ -26,7 +26,7 @@ const SearchBox = () => {
   };
 
   return (
-    <div className="container search-container">
+    <div className=" search-container">
       <form action="">
         <div className="input-group mb-3">
           <input
