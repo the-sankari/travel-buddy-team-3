@@ -78,3 +78,4 @@ You can view the live project here: [Live Page](http://.....com)
 - **Bishnu Suyel**
 - GitHub: [@Bis10](https://github.com/Bis10)
   
+## Licences
