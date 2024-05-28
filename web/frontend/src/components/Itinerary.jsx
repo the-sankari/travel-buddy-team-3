@@ -18,7 +18,6 @@ const Itinerary = () => {
           </li>
         ))}
       </ul>
-      
       <div className="form-floating">
         <input
           className="form-control"
