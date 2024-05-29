@@ -144,3 +144,27 @@ body {
     font-family: "Roboto", sans-serif;
   }
 }
+
+
+
+/* Forecast */
+
+.forecast-container{
+  width: 100%;
+  height: 10%;
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.daily-forecast{
+  display: flex;
+}
+
+.forecast-card{
+  width: 100px;
+  border: none;
+  img{
+    width: 100px;
+  }
+}

@@ -61,63 +61,42 @@ const TripPlanner = () => {
   }, [lat, lon]);
 
   return (
-    // <div className=" trip-planner">
-    //   <div className="left">
-    //     <div className="searchbox-current-weather">
-    //       <div className="searchbox-card">
-    //         <SearchBox />
-    //       </div>
-    //       <div className="current-weather">
-    //         <p>Current Weather</p>
-    //         <img src={image3} alt="" />
-    //       </div>
-    //     </div>
-    //     <div className="weather-forecast">
-    //       <h5>Weather forecast for your trip’s duration:</h5>
-    //       <img src={image2} alt="" />
-    //     </div>
-    //     <div className="itinerary-planner">
-    //       <h4>Itinerary Planner</h4>
-    //       <img src={image4} alt="" />
-    //     </div>
-    //   </div>
-    //   <div className="destination-card">
-    //     <div className="destination">
-    //       <img src={destination} alt="" />
-    //     </div>
-    //     <div className="map">
-    //       <img src={map} alt="" />
-    //     </div>
-    //   </div>
-    // </div>
-    <div>
-      <SearchBox
-        handleSearch={handleSearch}
-        setCityName={setCityName}
-        cityName={cityName}
-      />
-      <br />
-      <br />
-      <br />
-      {currentWeather && <CurrentWeatherCard currentWeather={currentWeather} />}
-      <br />
-      <br />
-      <br />
-      <DestinationCard
-        countryName={countryName}
-        lat={lat}
-        lon={lon}
-        mapRef={mapRef}
-      />
-      <br />
-      <br />
-      <br />
-      {lat && lon && <Forecast lat={lat} lon={lon} />}
-      <br />
-      <br />
-      <br />
-      {/* <Itinerary /> */}
-    </div>
+    <>
+      <div className=" trip-planner">
+        <div className="left">
+          <div className="searchbox-current-weather">
+            <div className="searchbox-card">
+              <SearchBox
+                handleSearch={handleSearch}
+                setCityName={setCityName}
+                cityName={cityName}
+              />
+            </div>
+            <div className="current-weather">
+              <p>Current Weather</p>
+              {currentWeather && (
+                <CurrentWeatherCard currentWeather={currentWeather} />
+              )}
+            </div>
+          </div>
+          <div className="weather-forecast">
+            {lat && lon && <Forecast lat={lat} lon={lon} />}
+          </div>
+          <div className="itinerary-planner">
+            <h4>Itinerary Planner</h4>
+            <img src={image4} alt="" />
+          </div>
+        </div>
+        <div className="destination-card">
+          <DestinationCard
+            countryName={countryName}
+            lat={lat}
+            lon={lon}
+            mapRef={mapRef}
+          />
+        </div>
+      </div>
+    </>
   );
 };
 

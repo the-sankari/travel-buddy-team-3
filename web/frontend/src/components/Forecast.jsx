@@ -1,4 +1,6 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from "react";
+import ForcastCard from "./ForcastCard";
 
 const Forecast = ({ lat, lon }) => {
   const [weatherData, setWeatherData] = useState(null);
@@ -52,22 +54,16 @@ const Forecast = ({ lat, lon }) => {
   );
 
   return (
-    <div>
+    <div className="forecast-container">
       <h1>Weather Forecast</h1>
-      {filteredData.map((weather) => (
-        <div key={weather.dt}>
-          <h4>{weather.dt_txt}</h4>
-          <img
-            src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
-            alt={`${weather.weather[0].description} icon`}
-          />
-          <p>
-            {Math.round(weather.main.temp)} °C, {weather.weather[0].description}
-          </p>
-
-          <hr />
-        </div>
-      ))}
+      <div className="daily-forecast">
+        {filteredData.map((weather) => (
+          <div key={weather.dt}>
+            <ForcastCard key={weather.dt} {...weather} />
+            <hr />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
