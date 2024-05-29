@@ -23,7 +23,7 @@ const TripPlanner = () => {
 
   const handleSearch = async (cityName) => {
     try {
-      const response = await fetch("http://localhost:8000/api/city-data", {
+      const response = await fetch("http://localhost:8007/api/city-data", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
