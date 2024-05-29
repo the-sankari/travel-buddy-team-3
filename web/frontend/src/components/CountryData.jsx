@@ -80,32 +80,39 @@ const CountryData = ({ countryName }) => {
   }
 
   return (
-    <div>
+    // Country Data
+    <div className="country-details">
       <h1>
         {countryData.flag} {countryData.name.common}
       </h1>
-      <p>Capital: {countryData.capital ? countryData.capital : "N/A"}</p>
-      <p>
-        Currency:{" "}
-        {countryData.currencies
-          ? Object.keys(countryData.currencies).join(", ")
-          : "N/A"}
-      </p>
-      <p>
-        Languages:{" "}
-        {countryData.languages
-          ? Object.values(countryData.languages).join(", ")
-          : "N/A"}
-      </p>
-      {countryData.car && countryData.car.side === "left" && (
-        <p>Notice: 🚗 Left-hand traffic!</p>
-      )}
-      {timeDifference && (
-        <p>
-          Timezone: {countryData.timezones[0]} ({timeDifference.difference}{" "}
-          hours {timeDifference.isAhead ? "ahead" : "behind"} of local time)
-        </p>
-      )}
+      <div className="country-data">
+        <div className="country-data_item_1">
+          <p>Capital: {countryData.capital ? countryData.capital : "N/A"}</p>
+          <p>
+            Languages:{" "}
+            {countryData.languages
+              ? Object.values(countryData.languages).join(", ")
+              : "N/A"}
+          </p>
+          <p>
+            Currency:{" "}
+            {countryData.currencies
+              ? Object.keys(countryData.currencies).join(", ")
+              : "N/A"}
+          </p>
+        </div>
+        <div className="country-data_item_2">
+          {timeDifference && (
+            <p>
+              Timezone: {countryData.timezones[0]} ({timeDifference.difference}{" "}
+              hours {timeDifference.isAhead ? "ahead" : "behind"} of local time)
+            </p>
+          )}
+          {countryData.car && countryData.car.side === "left" && (
+            <p>Notice: 🚗 Left-hand traffic!</p>
+          )}
+        </div>
+      </div>
     </div>
   );
 };
