@@ -1,33 +1,37 @@
 import { useState } from "react";
 
-const SearchBox = () => {
+const SearchBox = ({ handleSearch, setCityName }) => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [weather, setWeather] = useState(null);
-  const [countryInfo, setCountryInfo] = useState(null);
-  const [coordinates, setCoordinates] = useState({ longitude: 0, latitude: 0 });
+  // const [weather, setWeather] = useState(null);
+  // const [countryInfo, setCountryInfo] = useState(null);
+  // const [coordinates, setCoordinates] = useState({ longitude: 0, latitude: 0 });
 
-  const handleSearch = async () => {
-    try {
-      const weatherResponse = await getWeather(searchTerm);
-      setWeather(weatherResponse.data);
+  // const handleSearch = async () => {
+  //   try {
+  //     const weatherResponse = await getWeather(searchTerm);
+  //     setWeather(weatherResponse.data);
 
-      const countryResponse = await getCountryInfo(searchTerm);
-      setCountryInfo(countryResponse.data[0]);
+  //     const countryResponse = await getCountryInfo(searchTerm);
+  //     setCountryInfo(countryResponse.data[0]);
 
-      if (weatherResponse.data.coord) {
-        setCoordinates({
-          longitude: weatherResponse.data.coord.lon,
-          latitude: weatherResponse.data.coord.lat,
-        });
-      }
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
+  //     if (weatherResponse.data.coord) {
+  //       setCoordinates({
+  //         longitude: weatherResponse.data.coord.lon,
+  //         latitude: weatherResponse.data.coord.lat,
+  //       });
+  //     }
+  //   } catch (error) {
+  //     console.error("Error fetching data:", error);
+  //   }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setCityName(searchTerm);
+    handleSearch(searchTerm);
   };
 
   return (
     <div className=" search-container">
-      <form action="">
+      <form onSubmit={handleSubmit}>
         <div className="input-group mb-3">
           <input
             type="text"
@@ -40,9 +44,8 @@ const SearchBox = () => {
           />
           <button
             className="btn btn-outline-secondary"
-            type="button"
+            type="submit"
             id="button-addon2"
-            onClick={handleSearch}
           >
             Search
           </button>
