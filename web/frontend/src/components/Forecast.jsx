@@ -8,7 +8,7 @@ const Forecast = ({ lat, lon }) => {
     const fetchWeatherData = async () => {
       try {
         // POST latitude and longitude to backend forecast API endpoint:
-        const response = await fetch("http://localhost:8000/api/forecast", {
+        const response = await fetch("http://localhost:8007/api/forecast", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
