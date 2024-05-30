@@ -1,23 +1,16 @@
-/* eslint-disable no-unused-vars */
-// src/pages/TripPlanner.jsx
 import React, { useState, useEffect, useRef } from "react";
 import SearchBox from "../components/SearchBox";
 import Itinerary from "../components/Itinerary";
-import image from "../assets/images/placeholderImage.png";
-import image3 from "../assets/images/currentWeather.png";
-import image2 from "../assets/images/forecast.png";
 import image4 from "../assets/images/itinerarybox.png";
-import destination from "../assets/images/destination.png";
-import map from "../assets/images/map.png";
 import DestinationCard from "../components/DestinationCard";
 import Forecast from "../components/Forecast";
 import CurrentWeatherCard from "../components/CurrentWeatherCard";
 
-const TripPlanner = () => {
+const TripPlanner = ({ initialCoords }) => {
   const [cityName, setCityName] = useState(null);
   const [countryName, setCountryName] = useState(null);
-  const [lat, setLat] = useState(null);
-  const [lon, setLon] = useState(null);
+  const [lat, setLat] = useState(initialCoords.lat);
+  const [lon, setLon] = useState(initialCoords.lon);
   const [currentWeather, setCurrentWeather] = useState(null);
   const mapRef = useRef(null);
 
