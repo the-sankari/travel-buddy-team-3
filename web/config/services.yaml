@@ -22,10 +22,6 @@ services:
         arguments:
             $MAP_KEY: '%MAP_KEY%'
             $WEATHER_KEY: '%WEATHER_KEY%'
-    App\Controller\GeolocationController:
-        arguments:
-            $MAP_KEY: '%MAP_KEY%'
-            $WEATHER_KEY: '%WEATHER_KEY%'
 
 
     # makes classes in src/ available to be used as services
