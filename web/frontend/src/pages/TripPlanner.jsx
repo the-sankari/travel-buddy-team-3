@@ -62,7 +62,7 @@ const TripPlanner = () => {
 
   return (
     <>
-      <div className=" trip-planner">
+      <div className="container trip-planner">
         <div className="left">
           <div className="searchbox-current-weather">
             <div className="searchbox-card">
@@ -73,7 +73,6 @@ const TripPlanner = () => {
               />
             </div>
             <div className="current-weather">
-              <p>Current Weather</p>
               {currentWeather && (
                 <CurrentWeatherCard currentWeather={currentWeather} />
               )}
