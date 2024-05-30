@@ -26,7 +26,7 @@ const MapComponent = ({ lat, lon, mapRef }) => {
     }
   }, [lat, lon, mapRef]);
 
-  return <div ref={mapContainer} style={{ width: "100%", height: "500px" }} />;
+  return <div ref={mapContainer} style={{ width: "100%", height: "60%" }} />;
 };
 
 export default MapComponent;

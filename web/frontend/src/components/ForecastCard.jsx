@@ -1,6 +1,6 @@
 import React from "react";
 
-const ForcastCard = (weather) => {
+const ForecastCard = (weather) => {
   const date = new Date(weather.dt_txt);
   const dayname = date.toLocaleDateString("en-US", { weekday: "short" });
   return (
@@ -17,7 +17,7 @@ const ForcastCard = (weather) => {
   );
 };
 
-export default ForcastCard;
+export default ForecastCard;
 
 
 // , {weather.weather[0].description}

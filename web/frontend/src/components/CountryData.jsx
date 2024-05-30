@@ -49,6 +49,7 @@ const CountryData = ({ countryName }) => {
         }
 
         setCountryData(response.data[0]);
+        console.log(response.data[0]);
 
         // Extract the first timezone and calculate time difference
         const firstTimezone = response.data[0].timezones[0];

@@ -3,6 +3,11 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 .guide-card-group {
   box-shadow: 0 0 2px #777;
   position: relative;
@@ -59,19 +64,30 @@ body {
     display: flex;
     width: 100%;
     min-height: 200px;
+    margin-top: 40px;
     .searchbox-card {
       flex: 3;
       align-self: center;
       justify-self: center;
       background-color: #fffff0;
-      padding: 20px;
       border-radius: 5px;
+      padding: 20px;
     }
     .current-weather {
       flex: 1;
       text-align: center;
-      padding-top: 20px;
-      color: #fffff0;
+      color: #111;
+      width: 100%;
+      padding: 20px;
+      h5 {
+        font-size: 0.8rem;
+      }
+      img {
+        width: 50%;
+      }
+      p {
+        font-size: 0.8rem;
+      }
     }
   }
 }
@@ -92,11 +108,11 @@ body {
 .destination-card {
   width: 50%;
   height: 100%;
-  padding: 40px 20px;
- 
-  .mapboxgl-canvas-container{
+  padding: 60px 20px;
+
+  .mapboxgl-canvas-container {
     width: 100%;
-    canvas.mapboxgl-canvas{
+    canvas.mapboxgl-canvas {
       width: 100%;
     }
   }

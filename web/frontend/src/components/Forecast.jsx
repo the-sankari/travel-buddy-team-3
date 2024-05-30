@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from "react";
-import ForcastCard from "./ForcastCard";
+import ForecastCard from "./ForecastCard";
 
 const Forecast = ({ lat, lon }) => {
   const [weatherData, setWeatherData] = useState(null);
@@ -59,7 +59,7 @@ const Forecast = ({ lat, lon }) => {
       <div className="daily-forecast">
         {filteredData.map((weather) => (
           <div key={weather.dt}>
-            <ForcastCard key={weather.dt} {...weather} />
+            <ForecastCard key={weather.dt} {...weather} />
             <hr />
           </div>
         ))}
