@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const CountryData = ({ countryName }) => {
+const CountryData = ({ countryName, displayedCityName }) => {
   const [countryData, setCountryData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -84,7 +84,7 @@ const CountryData = ({ countryName }) => {
     // Country Data
     <div className="country-details">
       <h1>
-        {countryData.flag} {countryData.name.common}
+        {countryData.flag} {displayedCityName}, {countryData.name.common}
       </h1>
       <div className="country-data">
         <div className="country-data_item_1">
