@@ -38,9 +38,6 @@
 // };
 
 // export default Itinerary;
-
-
-
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -84,7 +81,16 @@ const Itinerary = () => {
       .post("http://localhost:8002/api/activities", activities)
       .then((response) => {
         console.log("Success:", response.data);
-        navigate("/planner");
+        setActivities({
+          dayOne: "",
+          dayTwo: "",
+          dayThree: "",
+          dayFour: "",
+          dayFive: "",
+        });
+        setCurrentActivity("");
+        setSelectedDay("dayOne");
+        navigate("/activities");
       })
       .catch((error) => console.error("Error:", error));
   };
@@ -112,7 +118,7 @@ const Itinerary = () => {
           id="activity"
           value={currentActivity}
           onChange={(e) => setCurrentActivity(e.target.value)}
-          placeholder="Enter activities"
+          placeholder="To do"
         />
         <button
           onClick={handleAddActivity}
@@ -152,3 +158,5 @@ const Itinerary = () => {
 };
 
 export default Itinerary;
+
+
