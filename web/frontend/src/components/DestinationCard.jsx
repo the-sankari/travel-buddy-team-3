@@ -1,11 +1,22 @@
 import React from "react";
-import CountryData from "./CountryData";
+import DestinationInfo from "./DestinationInfo";
 import MapComponent from "./MapComponent";
 
-const DestinationCard = ({ countryName, lat, lon, mapRef }) => {
+const DestinationCard = ({
+  countryName,
+  displayedCityName,
+  lat,
+  lon,
+  mapRef,
+}) => {
   return (
     <>
-      {countryName && <CountryData countryName={countryName} />}
+      {countryName && (
+        <DestinationInfo
+          countryName={countryName}
+          displayedCityName={displayedCityName}
+        />
+      )}
       <MapComponent lat={lat} lon={lon} mapRef={mapRef} />
     </>
   );

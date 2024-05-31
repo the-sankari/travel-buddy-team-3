@@ -14,7 +14,7 @@ const CurrentWeatherCard = ({ currentWeather }) => {
   return (
     // <div className="current-weather-container">
     <>
-      <h5>Curremt Weather</h5>
+      <h5>Current Weather</h5>
       <p>{dayname}</p>
       <img
         src={`https://openweathermap.org/img/wn/${currentWeather.weather[0].icon}@2x.png`}

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const CountryData = ({ countryName }) => {
+const DestinationInfo = ({ countryName, displayedCityName }) => {
   const [countryData, setCountryData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -84,7 +84,7 @@ const CountryData = ({ countryName }) => {
     // Country Data
     <div className="country-details">
       <h1>
-        {countryData.flag} {countryData.name.common}
+        {countryData.flag} {displayedCityName}, {countryData.name.common}
       </h1>
       <div className="country-data">
         <div className="country-data_item_1">
@@ -113,9 +113,21 @@ const CountryData = ({ countryName }) => {
             <p>Notice: 🚗 Left-hand traffic!</p>
           )}
         </div>
+        <div>
+          <p>
+            Check out{" "}
+            <a
+              href={`https://en.wikivoyage.org/wiki/${displayedCityName}`}
+              target="_blank"
+            >
+              Wikivoyage
+            </a>{" "}
+            for tourist information on {displayedCityName}.
+          </p>
+        </div>
       </div>
     </div>
   );
 };
 
-export default CountryData;
+export default DestinationInfo;
