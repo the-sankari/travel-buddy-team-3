@@ -50,8 +50,8 @@ class MapController extends AbstractController
             }
         }
 
-        // Find city name from response:
-        $displayedCityName = $data['features'][0]['text'];
+        // Find city name from response (matching_text = name in english):
+        $displayedCityName = $data['features'][0]['matching_text'] ?? $data['features'][0]['text'];
 
         // Fetch weather data from OpenWeatherMap API:
         $weatherUrl = "https://api.openweathermap.org/data/2.5/weather?lat={$lat}&lon={$lon}&appid={$this->WEATHER_KEY}&units=metric";
