@@ -96,7 +96,7 @@ const Itinerary = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mb-2" style={{ width: 800 }}>
+    <form onSubmit={handleSubmit}>
       {/* <h1>To Do List</h1> */}
       <div>
         <label htmlFor="day"></label>
