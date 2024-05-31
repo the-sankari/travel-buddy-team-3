@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 const ContactPage = () => {
   return (
@@ -9,16 +9,26 @@ const ContactPage = () => {
           <p className="mb-0 fs-5">
             Feel free to reach out using the contact information below
           </p>
-          <p className='mb-0 fs-5'>or by filling out the form.</p>
+          <p className="mb-0 fs-5">or by filling out the form.</p>
         </div>
         <div className="row mt-5">
           <div className="col-md-6">
             <div className="card">
               <div className="card-body">
                 <h2>Contact Information</h2>
-                <p>Email: travelbuddy@gmail.com</p>
-                <p>Phone: +358 400 000 000 </p>
-                <p>Address: Street 60 B 90, Helsinki, Finland</p>
+                <p>
+                  <i className="fa-solid fa-envelope"></i> Email: example@gmail.com
+                </p>
+                <p>
+                  <i className="fa-solid fa-phone"></i> Phone: +358 000 000 000
+                </p>
+                <p>
+                  <i className="fa-solid fa-location-dot"></i> Address: Street 60 B
+                  90, City, Country
+                </p>
+                <p>
+                  <i className="fa-solid fa-tag"></i> Y-tunnus 100000-0
+                </p>
               </div>
             </div>
           </div>
@@ -74,6 +84,6 @@ const ContactPage = () => {
       </div>
     </>
   );
-}
+};
 
 export default ContactPage;
