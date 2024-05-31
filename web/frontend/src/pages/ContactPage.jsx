@@ -4,12 +4,12 @@ const ContactPage = () => {
   return (
     <>
       <div className="container">
-        <h1 className="mt-2 fs-2">Contact Us</h1>
+        <h1>Contact Us</h1>
         <div className="split-paragraph">
           <p className="mb-0 fs-5">
             Feel free to reach out using the contact information below
           </p>
-          <p className="mb-0 fs-5">or by filling out the form.</p>
+          <p className='mb-0 fs-5'>or by filling out the form.</p>
         </div>
         <div className="row mt-5">
           <div className="col-md-6">
@@ -19,7 +19,6 @@ const ContactPage = () => {
                 <p>Email: travelbuddy@gmail.com</p>
                 <p>Phone: +358 400 000 000 </p>
                 <p>Address: Street 60 B 90, Helsinki, Finland</p>
-                <p>Y-tunnus: 100000-0</p>
               </div>
             </div>
           </div>
@@ -27,11 +26,7 @@ const ContactPage = () => {
             <div className="card">
               <div className="card-body">
                 <h2>Contact Form</h2>
-                <form
-                  action="MAILTO:travelbuddy@gmail.com"
-                  method="post"
-                  enctype="text/plain"
-                >
+                <form>
                   <div className="mb-3">
                     <label htmlFor="name" className="form-label">
                       Name:
