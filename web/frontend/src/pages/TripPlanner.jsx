@@ -79,7 +79,8 @@ const TripPlanner = ({ initialCoords }) => {
           </div>
           <div className="itinerary-planner">
             <h4>Itinerary Planner</h4>
-            <img src={image4} alt="" />
+            {<Itinerary />}
+            {/* <img src={image4} alt="" /> */}
           </div>
         </div>
         <div className="destination-card">
