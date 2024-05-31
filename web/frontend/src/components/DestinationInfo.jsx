@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import WikipediaText from "./WikipediaText";
 
 const DestinationInfo = ({ countryName, displayedCityName }) => {
   const [countryData, setCountryData] = useState(null);
@@ -114,6 +115,7 @@ const DestinationInfo = ({ countryName, displayedCityName }) => {
           )}
         </div>
         <div>
+          <WikipediaText articleTitle={displayedCityName} />
           <p>
             Check out{" "}
             <a
