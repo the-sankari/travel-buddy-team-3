@@ -78,7 +78,7 @@ const Itinerary = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:8002/api/activities", activities)
+      .post("http://localhost:8007/api/activities", activities)
       .then((response) => {
         console.log("Success:", response.data);
         setActivities({
