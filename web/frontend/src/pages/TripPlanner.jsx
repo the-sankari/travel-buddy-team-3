@@ -9,6 +9,7 @@ import CurrentWeatherCard from "../components/CurrentWeatherCard";
 const TripPlanner = ({ initialCoords }) => {
   const [cityName, setCityName] = useState(null);
   const [countryName, setCountryName] = useState(null);
+  const [displayedCityName, setDisplayedCityName] = useState(null);
   const [lat, setLat] = useState(initialCoords.lat);
   const [lon, setLon] = useState(initialCoords.lon);
   const [currentWeather, setCurrentWeather] = useState(null);
@@ -37,10 +38,12 @@ const TripPlanner = ({ initialCoords }) => {
 
         setCurrentWeather(data.weather);
         setCountryName(data.countryName);
+        setDisplayedCityName(data.displayedCityName);
         setLat(data.coordinates.lat);
         setLon(data.coordinates.lng);
 
         console.log(`Country name from Geocoding API: ${data.countryName}`);
+        console.log(`City name from Geocoding API: ${data.displayedCityName}`);
       } else {
         alert("City not found");
       }
@@ -82,6 +85,7 @@ const TripPlanner = ({ initialCoords }) => {
         <div className="destination-card">
           <DestinationCard
             countryName={countryName}
+            displayedCityName={displayedCityName}
             lat={lat}
             lon={lon}
             mapRef={mapRef}
