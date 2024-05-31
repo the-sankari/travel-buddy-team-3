@@ -1,5 +1,5 @@
 import React from "react";
-import CountryData from "./CountryData";
+import DestinationInfo from "./DestinationInfo";
 import MapComponent from "./MapComponent";
 
 const DestinationCard = ({
@@ -12,7 +12,7 @@ const DestinationCard = ({
   return (
     <>
       {countryName && (
-        <CountryData
+        <DestinationInfo
           countryName={countryName}
           displayedCityName={displayedCityName}
         />

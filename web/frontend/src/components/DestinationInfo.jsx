@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const CountryData = ({ countryName, displayedCityName }) => {
+const DestinationInfo = ({ countryName, displayedCityName }) => {
   const [countryData, setCountryData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -130,4 +130,4 @@ const CountryData = ({ countryName, displayedCityName }) => {
   );
 };
 
-export default CountryData;
+export default DestinationInfo;
