@@ -113,6 +113,18 @@ const CountryData = ({ countryName, displayedCityName }) => {
             <p>Notice: 🚗 Left-hand traffic!</p>
           )}
         </div>
+        <div>
+          <p>
+            Check out{" "}
+            <a
+              href={`https://en.wikivoyage.org/wiki/${displayedCityName}`}
+              target="_blank"
+            >
+              Wikivoyage
+            </a>{" "}
+            for tourist information on {displayedCityName}.
+          </p>
+        </div>
       </div>
     </div>
   );
