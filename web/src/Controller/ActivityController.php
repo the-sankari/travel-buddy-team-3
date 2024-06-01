@@ -24,11 +24,11 @@ class ActivityController extends AbstractController
         foreach ($activities as $activity) {
             $data[] = [
                 'id' => $activity->getId(),
-                'dayOne' => $activity->getDay1(),
-                'dayTwo' => $activity->getDay2(),
-                'dayThree' => $activity->getDay3(),
-                'dayFour' => $activity->getDay4(),
-                'dayFive' => $activity->getDay5(),
+                'dayOne' => $activity->getDayOne(),
+                'dayTwo' => $activity->getDayTwo(),
+                'dayThree' => $activity->getDayThree(),
+                'dayFour' => $activity->getDayFour(),
+                'dayFive' => $activity->getDayFive(),
             ];
         }
 
@@ -49,22 +49,22 @@ class ActivityController extends AbstractController
 
         $activity = new Activity();
 
-        $activity->setDay1($dayOne);
-        $activity->setDay2($dayTwo);
-        $activity->setDay3($dayThree);
-        $activity->setDay4($dayFour);
-        $activity->setDay5($dayFive);
+        $activity->setDayOne($dayOne);
+        $activity->setDayTwo($dayTwo);
+        $activity->setDayThree($dayThree);
+        $activity->setDayFour($dayFour);
+        $activity->setDayFive($dayFive);
 
         $entityManager->persist($activity);
         $entityManager->flush();
 
         $responseData = [
             'id' => $activity->getId(),
-            'dayOne' => $activity->getDay1(),
-            'dayTwo' => $activity->getDay2(),
-            'dayThree' => $activity->getDay3(),
-            'dayFour' => $activity->getDay4(),
-            'dayFive' => $activity->getDay5(),
+            'dayOne' => $activity->getDayOne(),
+            'dayTwo' => $activity->getDayTwo(),
+            'dayThree' => $activity->getDayThree(),
+            'dayFour' => $activity->getDayFour(),
+            'dayFive' => $activity->getDayFive(),
         ];
 
         return $this->json($responseData);
@@ -83,11 +83,11 @@ class ActivityController extends AbstractController
 
         $data =  [
             'id' => $activity->getId(),
-            'dayOne' => $activity->getDay1(),
-            'dayTwo' => $activity->getDay2(),
-            'dayThree' => $activity->getDay3(),
-            'dayFour' => $activity->getDay4(),
-            'dayFive' => $activity->getDay5(),
+            'dayOne' => $activity->getDayOne(),
+            'dayTwo' => $activity->getDayTwo(),
+            'dayThree' => $activity->getDayThree(),
+            'dayFour' => $activity->getDayFour(),
+            'dayFive' => $activity->getDayFive(),
         ];
 
         return $this->json($data);
@@ -111,11 +111,11 @@ class ActivityController extends AbstractController
             return $this->json('No trip found for id ' . $id, 404);
         }
 
-        $activity->setDay1(trim($dayOne));
-        $activity->setDay2(trim($dayTwo));
-        $activity->setDay3(trim($dayThree));
-        $activity->setDay4(trim($dayFour));
-        $activity->setDay5(trim($dayFive));
+        $activity->setDayOne(trim($dayOne));
+        $activity->setDayTwo(trim($dayTwo));
+        $activity->setDayThree(trim($dayThree));
+        $activity->setDayFour(trim($dayFour));
+        $activity->setDayFive(trim($dayFive));
 
 
         $entityManager->persist($activity);
@@ -123,17 +123,17 @@ class ActivityController extends AbstractController
 
         $data =  [
             'id' => $activity->getId(),
-            'dayOne' => $activity->getDay1(),
-            'dayTwo' => $activity->getDay2(),
-            'dayThree' => $activity->getDay3(),
-            'dayFour' => $activity->getDay4(),
-            'dayFive' => $activity->getDay5(),
+            'dayOne' => $activity->getDayOne(),
+            'dayTwo' => $activity->getDayTwo(),
+            'dayThree' => $activity->getDayThree(),
+            'dayFour' => $activity->getDayFour(),
+            'dayFive' => $activity->getDayFive(),
         ];
         return $this->json($data);
     }
 
 
-    #[Route('/activities/{id}', name: 'activity_delete', methods: ['delete'])]
+    #[Route('/activities/{id}', name: 'activity_delete', methods: ['DELETE'])]
     public function delete(EntityManagerInterface $entityManager, int $id): JsonResponse
     {
         $activity = $entityManager->getRepository(Activity::class)->find($id);
