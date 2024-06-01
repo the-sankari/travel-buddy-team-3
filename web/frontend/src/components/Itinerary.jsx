@@ -78,7 +78,7 @@ const Itinerary = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:8002/api/activities", activities)
+      .post("http://localhost:8007/api/activities", activities)
       .then((response) => {
         console.log("Success:", response.data);
         setActivities({
@@ -96,7 +96,7 @@ const Itinerary = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mb-2" style={{ width: 800 }}>
+    <form onSubmit={handleSubmit}>
       {/* <h1>To Do List</h1> */}
       <div>
         <label htmlFor="day"></label>
