@@ -1,7 +1,10 @@
 import { useState } from "react";
+import Swal from "sweetalert2";
 
 const SearchBox = ({ handleSearch, setCityName }) => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
   // const [weather, setWeather] = useState(null);
   // const [countryInfo, setCountryInfo] = useState(null);
   // const [coordinates, setCoordinates] = useState({ longitude: 0, latitude: 0 });
@@ -25,6 +28,42 @@ const SearchBox = ({ handleSearch, setCityName }) => {
   //   }
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const start = new Date(startDate);
+    const end = new Date (endDate);
+
+if (isNaN(start.getTime()) || isNaN(end.getTime())) {
+  Swal.fire({
+    icon: "error",
+    title: "Oops...",
+    text: "Please select both start and end dates.",
+  });
+  return;
+}
+if (start > end) {
+  Swal.fire({
+    icon: "error",
+    title: "Oops...",
+    text: "Start date should be before or the same as the end date.",
+  });
+  return;
+}
+
+
+
+
+    const differenceInTime = end.getTime()-start.getTime();
+    const differenceInDays = differenceInTime / (1000 * 3600 * 24);
+
+    if (differenceInDays > 5) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Start date to end date should not be more than 5 days.",
+      });
+      return;
+    }
+
     setCityName(searchTerm);
     handleSearch(searchTerm);
   };
@@ -63,6 +102,8 @@ const SearchBox = ({ handleSearch, setCityName }) => {
               placeholder="Username"
               aria-label="Username"
               aria-describedby="basic-addon1"
+              value={startDate}
+              onChange={(e) => setStartDate(e.target.value)}
             />
           </div>
           <div className="input-group col mb-3">
@@ -77,6 +118,8 @@ const SearchBox = ({ handleSearch, setCityName }) => {
               placeholder="Username"
               aria-label="Username"
               aria-describedby="basic-addon1"
+              value={endDate}
+              onChange={(e) => setEndDate(e.target.value)}
             />
           </div>
         </div>
