@@ -9,7 +9,7 @@ const ActivityList = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8002/api/activities")
+      .get("http://localhost:8007/api/activities")
       .then((response) => {
         if (Array.isArray(response.data)) {
           setActivities(response.data);
@@ -35,7 +35,7 @@ const ActivityList = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:8002/api/activities/${activityId}`)
+          .delete(`http://localhost:8007/api/activities/${activityId}`)
           .then(() => {
             setActivities(
               activities.filter((activity) => activity.id !== activityId)
