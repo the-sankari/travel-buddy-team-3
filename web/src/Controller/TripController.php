@@ -14,23 +14,26 @@ use Symfony\Component\HttpFoundation\Request;
 #[Route('/api', name: 'api_')]
 class TripController extends AbstractController
 {
-    private $encryptionMethod = 'AES-256-CBC';
-    private $secretKey = 'your_secret_key';
-    private $secretIv = 'your_secret_iv';
-
-    private function encrypt($data)
+    // Masking helper function
+    private function maskSensitiveData(array $tripData): array
     {
-        $key = substr(hash('sha256', $this->secretKey), 0, 8);
-        $iv = substr(hash('sha256', $this->secretIv), 0, 16);
-        return base64_encode(openssl_encrypt($data, $this->encryptionMethod, $key, 0, $iv));
+        // Mask email
+        $email = $tripData['email'];
+        $emailParts = explode('@', $email);
+        if (strlen($emailParts[0]) > 2) {
+            $emailParts[0] = substr($emailParts[0], 0, 2) . str_repeat('*', strlen($emailParts[0]) - 2);
+        }
+        $tripData['email'] = implode('@', $emailParts);
+
+        // Mask mobile
+        $mobile = $tripData['mobile'];
+        if (strlen($mobile) > 4) {
+            $tripData['mobile'] = str_repeat('*', strlen($mobile) - 4) . substr($mobile, -4);
+        }
+
+        return $tripData;
     }
 
-    private function decrypt($data)
-    {
-        $key = substr(hash('sha256', $this->secretKey), 0, 8);
-        $iv = substr(hash('sha256', $this->secretIv), 0, 16);
-        return openssl_decrypt(base64_decode($data), $this->encryptionMethod, $key, 0, $iv);
-    }
     #[Route('/trips', name: 'trip_index', methods: ['GET'])]
     public function index(EntityManagerInterface $entityManager): JsonResponse
     {
@@ -39,7 +42,7 @@ class TripController extends AbstractController
         $data = [];
 
         foreach ($trips as $trip) {
-            $data[] = [
+            $tripData = [
                 'id' => $trip->getId(),
                 'destination' => $trip->getDestination(),
                 'checkIn' => $trip->getCheckIn()->format('Y-m-d'),
@@ -50,6 +53,9 @@ class TripController extends AbstractController
                 'longitude' => $trip->getLongitude(),
                 'latitude' => $trip->getLatitude()
             ];
+
+            // Mask sensitive data
+            $data[] = $this->maskSensitiveData($tripData);
         }
 
         return $this->json($data);
@@ -75,39 +81,15 @@ class TripController extends AbstractController
         $trip->setCheckIn(new \DateTime($checkIn));
         $trip->setCheckOut(new \DateTime($checkOut));
         $trip->setName(trim($name));
-        $trip->setEmail($this->encrypt($email));
-        $trip->setMobile($this->encrypt($mobile));
+        $trip->setEmail($email);
+        $trip->setMobile($mobile);
         $trip->setLongitude($longitude);
         $trip->setLatitude($latitude);
 
         $entityManager->persist($trip);
         $entityManager->flush();
 
-        $data =  [
-            'id' => $trip->getId(),
-            'destination' => $trip->getDestination(),
-            'checkIn' => $trip->getCheckIn()->format('Y-m-d'),
-            'checkOut' => $trip->getCheckOut()->format('Y-m-d'),
-            'name' => $trip->getName(),
-            'email' => $this->decrypt($trip->getEmail()),
-            'mobile' => $this->decrypt($trip->getMobile()),
-            'longitude' => $trip->getLongitude(),
-            'latitude' => $trip->getLatitude()
-        ];
-
-        return $this->json($data);
-    }
-
-    #[Route('/trips/{id}', name: 'trip_show', methods: ['GET'])]
-    public function show(EntityManagerInterface $entityManager, int $id): JsonResponse
-    {
-        $trip = $entityManager->getRepository(Trip::class)->find($id);
-
-        if (!$trip) {
-            return $this->json('No trip found for id ' . $id, 404);
-        }
-
-        $data =  [
+        $tripData = [
             'id' => $trip->getId(),
             'destination' => $trip->getDestination(),
             'checkIn' => $trip->getCheckIn()->format('Y-m-d'),
@@ -119,7 +101,37 @@ class TripController extends AbstractController
             'latitude' => $trip->getLatitude()
         ];
 
-        return $this->json($data);
+        // Mask sensitive data
+        $tripData = $this->maskSensitiveData($tripData);
+
+        return $this->json($tripData);
+    }
+
+    #[Route('/trips/{id}', name: 'trip_show', methods: ['GET'])]
+    public function show(EntityManagerInterface $entityManager, int $id): JsonResponse
+    {
+        $trip = $entityManager->getRepository(Trip::class)->find($id);
+
+        if (!$trip) {
+            return $this->json('No trip found for id ' . $id, 404);
+        }
+
+        $tripData = [
+            'id' => $trip->getId(),
+            'destination' => $trip->getDestination(),
+            'checkIn' => $trip->getCheckIn()->format('Y-m-d'),
+            'checkOut' => $trip->getCheckOut()->format('Y-m-d'),
+            'name' => $trip->getName(),
+            'email' => $trip->getEmail(),
+            'mobile' => $trip->getMobile(),
+            'longitude' => $trip->getLongitude(),
+            'latitude' => $trip->getLatitude()
+        ];
+
+        // Mask sensitive data
+        $tripData = $this->maskSensitiveData($tripData);
+
+        return $this->json($tripData);
     }
 
     #[Route('/trips/{id}', name: 'trip_update', methods: ['PUT', 'PATCH'], requirements: ['id' => '\d+'])]
@@ -148,10 +160,10 @@ class TripController extends AbstractController
         $trip->setCheckOut(new \DateTime($checkOut));
         $trip->setName(trim($name));
         if ($email !== null) {
-            $trip->setEmail($this->encrypt($email));
+            $trip->setEmail($email);
         }
         if ($mobile !== null) {
-            $trip->setMobile($this->encrypt($mobile));
+            $trip->setMobile($mobile);
         }
         $trip->setLongitude($longitude);
         $trip->setLatitude($latitude);
@@ -159,19 +171,22 @@ class TripController extends AbstractController
         $entityManager->persist($trip);
         $entityManager->flush();
 
-        $data =  [
+        $tripData = [
             'id' => $trip->getId(),
             'destination' => $trip->getDestination(),
             'checkIn' => $trip->getCheckIn()->format('Y-m-d'),
             'checkOut' => $trip->getCheckOut()->format('Y-m-d'),
             'name' => $trip->getName(),
-            'email' => $this->decrypt($trip->getEmail()),
-            'mobile' => $this->decrypt($trip->getMobile()),
+            'email' => $trip->getEmail(),
+            'mobile' => $trip->getMobile(),
             'longitude' => $trip->getLongitude(),
             'latitude' => $trip->getLatitude()
         ];
 
-        return $this->json($data);
+        // Mask sensitive data
+        $tripData = $this->maskSensitiveData($tripData);
+
+        return $this->json($tripData);
     }
 
     #[Route('/trips/{id}', name: 'trip_delete', methods: ['DELETE'])]
