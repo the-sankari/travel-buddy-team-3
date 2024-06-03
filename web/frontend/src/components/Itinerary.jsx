@@ -42,7 +42,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const Itinerary = () => {
+const Itinerary = ({ travelDates }) => {
   const [activities, setActivities] = useState({
     dayOne: "",
     dayTwo: "",
@@ -53,6 +53,8 @@ const Itinerary = () => {
   const [currentActivity, setCurrentActivity] = useState("");
   const [selectedDay, setSelectedDay] = useState("dayOne");
   const navigate = useNavigate();
+
+  console.log(`travelDates received by Itinerary: ${travelDates}`);
 
   const handleAddActivity = (e) => {
     e.preventDefault();
@@ -158,5 +160,3 @@ const Itinerary = () => {
 };
 
 export default Itinerary;
-
-

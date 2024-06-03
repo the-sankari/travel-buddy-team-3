@@ -15,6 +15,7 @@ const TripPlanner = ({ initialCoords }) => {
   const [currentWeather, setCurrentWeather] = useState(null);
   const [timezone, setTimezone] = useState(null);
   const mapRef = useRef(null);
+  const [travelDates, setTravelDates] = useState([]);
 
   const handleSearch = async (cityName) => {
     try {
@@ -70,7 +71,7 @@ const TripPlanner = ({ initialCoords }) => {
               <SearchBox
                 handleSearch={handleSearch}
                 setCityName={setCityName}
-                cityName={cityName}
+                setTravelDates={setTravelDates}
               />
             </div>
             <div className="current-weather">
@@ -84,7 +85,7 @@ const TripPlanner = ({ initialCoords }) => {
           </div>
           <div className="itinerary-planner">
             <h4>Itinerary Planner</h4>
-            {<Itinerary />}
+            <Itinerary travelDates={travelDates} />
             {/* <img src={image4} alt="" /> */}
           </div>
         </div>
