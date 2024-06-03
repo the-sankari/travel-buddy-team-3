@@ -7,6 +7,7 @@ const DestinationInfo = ({ countryName, displayedCityName, timezone }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [timeDifference, setTimeDifference] = useState(null);
+  const [destinationTime, setDestinationTime] = useState(null);
 
   // Timezone difference calculation provided by ChatGPT:
   const calculateTimeDifference = (timezoneOffsetInSeconds) => {
@@ -24,7 +25,14 @@ const DestinationInfo = ({ countryName, displayedCityName, timezone }) => {
     // Determine if the destination time is ahead or behind the user's local time
     const isAhead = differenceInHours > 0;
 
-    return { difference: Math.abs(differenceInHours), isAhead };
+    const destinationTime = new Date(
+      userTime.getTime() + offsetDifferenceInSeconds * 1000
+    );
+    return {
+      difference: Math.abs(differenceInHours),
+      isAhead,
+      destinationTime,
+    };
   };
 
   useEffect(() => {
@@ -47,6 +55,12 @@ const DestinationInfo = ({ countryName, displayedCityName, timezone }) => {
         // Calculate time difference using the provided timezone offset in seconds
         const difference = calculateTimeDifference(timezone);
         setTimeDifference(difference);
+        setDestinationTime(
+          difference.destinationTime.toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+          })
+        );
       } catch (err) {
         setError(err.message);
       } finally {
@@ -97,8 +111,8 @@ const DestinationInfo = ({ countryName, displayedCityName, timezone }) => {
         <div className="country-data_item_2">
           {timeDifference && timeDifference.difference !== 0 && (
             <p>
-              Time difference: {timeDifference.difference} hours{" "}
-              {timeDifference.isAhead ? "ahead" : "behind"} of local time
+              Time: {destinationTime} ({timeDifference.difference} hours{" "}
+              {timeDifference.isAhead ? "ahead" : "behind"} of local time)
             </p>
           )}
           {countryData.car && countryData.car.side === "left" && (
