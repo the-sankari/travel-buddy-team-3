@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Swal from "sweetalert2";
 
-const SearchBox = ({ handleSearch, setCityName }) => {
+const SearchBox = ({ handleSearch, setCityName, setTravelDates }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
@@ -30,29 +30,26 @@ const SearchBox = ({ handleSearch, setCityName }) => {
     e.preventDefault();
 
     const start = new Date(startDate);
-    const end = new Date (endDate);
+    const end = new Date(endDate);
 
-if (isNaN(start.getTime()) || isNaN(end.getTime())) {
-  Swal.fire({
-    icon: "error",
-    title: "Oops...",
-    text: "Please select both start and end dates.",
-  });
-  return;
-}
-if (start > end) {
-  Swal.fire({
-    icon: "error",
-    title: "Oops...",
-    text: "Start date should be before or the same as the end date.",
-  });
-  return;
-}
+    if (isNaN(start.getTime()) || isNaN(end.getTime())) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Please select both start and end dates.",
+      });
+      return;
+    }
+    if (start > end) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Start date should be before or the same as the end date.",
+      });
+      return;
+    }
 
-
-
-
-    const differenceInTime = end.getTime()-start.getTime();
+    const differenceInTime = end.getTime() - start.getTime();
     const differenceInDays = differenceInTime / (1000 * 3600 * 24);
 
     if (differenceInDays > 5) {
@@ -64,6 +61,15 @@ if (start > end) {
       return;
     }
 
+    // Construct an array of date stamps between start and end dates
+    const travelDatesArray = [];
+    const currentDate = new Date(start);
+    while (currentDate <= end) {
+      travelDatesArray.push(new Date(currentDate).toISOString().slice(0, 10));
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+
+    setTravelDates(travelDatesArray);
     setCityName(searchTerm);
     handleSearch(searchTerm);
   };
