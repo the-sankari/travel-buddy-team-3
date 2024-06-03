@@ -65,7 +65,7 @@ const DestinationInfo = ({ countryName, displayedCityName }) => {
 
     if (countryName) {
       fetchCountryData();
-      console.log(`Country name in CountryData component: ${countryName}`);
+      console.log(`Country name in DestinationInfo component: ${countryName}`);
     }
   }, [countryName]);
 
