@@ -53,11 +53,14 @@ const Forecast = ({ lat, lon }) => {
     weather.dt_txt.endsWith("12:00:00")
   );
 
+  // Remove the first entry (current day's forecast) from filteredData
+  const displayedData = filteredData.slice(1);
+
   return (
     <div className="forecast-container">
       <h1>Weather Forecast</h1>
       <div className="daily-forecast">
-        {filteredData.map((weather) => (
+        {displayedData.map((weather) => (
           <div key={weather.dt}>
             <ForecastCard key={weather.dt} {...weather} />
             <hr />
