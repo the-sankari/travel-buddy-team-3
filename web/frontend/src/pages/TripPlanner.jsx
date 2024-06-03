@@ -13,6 +13,7 @@ const TripPlanner = ({ initialCoords }) => {
   const [lat, setLat] = useState(initialCoords.lat);
   const [lon, setLon] = useState(initialCoords.lon);
   const [currentWeather, setCurrentWeather] = useState(null);
+  const [timezone, setTimezone] = useState(null);
   const mapRef = useRef(null);
 
   const handleSearch = async (cityName) => {
@@ -41,7 +42,11 @@ const TripPlanner = ({ initialCoords }) => {
         setDisplayedCityName(data.displayedCityName);
         setLat(data.coordinates.lat);
         setLon(data.coordinates.lng);
+        setTimezone(data.weather.timezone);
 
+        console.log(
+          `Timezone offset from OpenWeather: ${data.weather.timezone}`
+        );
         console.log(`Country name from Geocoding API: ${data.countryName}`);
         console.log(`City name from Geocoding API: ${data.displayedCityName}`);
       } else {
@@ -90,6 +95,7 @@ const TripPlanner = ({ initialCoords }) => {
             lat={lat}
             lon={lon}
             mapRef={mapRef}
+            timezone={timezone}
           />
         </div>
       </div>

@@ -2,37 +2,37 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import WikipediaText from "./WikipediaText";
 
-const DestinationInfo = ({ countryName, displayedCityName }) => {
+const DestinationInfo = ({ countryName, displayedCityName, timezone }) => {
   const [countryData, setCountryData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [timeDifference, setTimeDifference] = useState(null);
+  const [destinationTime, setDestinationTime] = useState(null);
 
-  // THIS IS CURRENTLY NOT WORKING PROPERLY:
   // Timezone difference calculation provided by ChatGPT:
-  const calculateTimeDifference = (timezone) => {
-    // Convert UTC+offset format to offset in minutes
-    const offsetSign = timezone.charAt(3) === "-" ? -1 : 1;
-    const offsetHours = parseInt(timezone.substring(4));
-    const offsetMinutes = offsetHours * 60 * offsetSign;
-
-    // Get user's local time and adjust it by the offset
+  const calculateTimeDifference = (timezoneOffsetInSeconds) => {
+    // Get user's local time and offset
     const userTime = new Date();
-    const countryTime = new Date(userTime.getTime() + offsetMinutes * 60000);
+    const userTimezoneOffsetInSeconds = userTime.getTimezoneOffset() * 60;
 
-    // Calculate the time difference in hours
-    const differenceInMs = countryTime - userTime;
-    const differenceInHours = differenceInMs / (1000 * 60 * 60);
+    // Calculate the offset difference in seconds
+    const offsetDifferenceInSeconds =
+      timezoneOffsetInSeconds + userTimezoneOffsetInSeconds;
 
-    // Determine if the country time is ahead or behind the user's local time
-    const isAhead = offsetSign === 1 ? true : false;
+    // Convert offset difference from seconds to hours
+    const differenceInHours = offsetDifferenceInSeconds / 3600;
 
-    // If the time difference is very small, consider it as the same time
-    if (Math.abs(differenceInMs) < 1000) {
-      return { difference: 0, isAhead };
-    }
+    // Determine if the destination time is ahead or behind the user's local time
+    const isAhead = differenceInHours > 0;
 
-    return { difference: Math.abs(differenceInHours), isAhead };
+    const destinationTime = new Date(
+      userTime.getTime() + offsetDifferenceInSeconds * 1000
+    );
+    return {
+      difference: Math.abs(differenceInHours),
+      isAhead,
+      destinationTime,
+    };
   };
 
   useEffect(() => {
@@ -52,10 +52,15 @@ const DestinationInfo = ({ countryName, displayedCityName }) => {
         setCountryData(response.data[0]);
         console.log(response.data[0]);
 
-        // Extract the first timezone and calculate time difference
-        const firstTimezone = response.data[0].timezones[0];
-        const difference = calculateTimeDifference(firstTimezone);
+        // Calculate time difference using the provided timezone offset in seconds
+        const difference = calculateTimeDifference(timezone);
         setTimeDifference(difference);
+        setDestinationTime(
+          difference.destinationTime.toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+          })
+        );
       } catch (err) {
         setError(err.message);
       } finally {
@@ -104,10 +109,10 @@ const DestinationInfo = ({ countryName, displayedCityName }) => {
           </p>
         </div>
         <div className="country-data_item_2">
-          {timeDifference && (
+          {timeDifference && timeDifference.difference !== 0 && (
             <p>
-              Timezone: {countryData.timezones[0]} ({timeDifference.difference}{" "}
-              hours {timeDifference.isAhead ? "ahead" : "behind"} of local time)
+              Time: {destinationTime} ({timeDifference.difference} hours{" "}
+              {timeDifference.isAhead ? "ahead" : "behind"} of local time)
             </p>
           )}
           {countryData.car && countryData.car.side === "left" && (

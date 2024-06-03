@@ -8,6 +8,7 @@ const DestinationCard = ({
   lat,
   lon,
   mapRef,
+  timezone,
 }) => {
   return (
     <>
@@ -15,6 +16,7 @@ const DestinationCard = ({
         <DestinationInfo
           countryName={countryName}
           displayedCityName={displayedCityName}
+          timezone={timezone}
         />
       )}
       <MapComponent lat={lat} lon={lon} mapRef={mapRef} />
