@@ -90,7 +90,7 @@ const Itinerary = () => {
         });
         setCurrentActivity("");
         setSelectedDay("dayOne");
-        navigate("/activities");
+        navigate("/planner");
       })
       .catch((error) => console.error("Error:", error));
   };
