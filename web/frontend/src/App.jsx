@@ -5,6 +5,11 @@ import HomePage from "./pages/HomePage";
 import TripPlanner from "./pages/TripPlanner";
 import ContactPage from "./pages/ContactPage";
 import LoginPage from "./pages/LoginPage";
+import ActivityList from "./components/ActivityList";
+import EditActivity from "./components/EditActivity";
+import ActivityDetail from "./components/ActivityDetail";
+import TripDetail from "./components/TripDetail";
+import AddTrip from "./components/AddTrip";
 
 const App = () => {
   const [initialCoords, setInitialCoords] = useState({
@@ -57,6 +62,11 @@ const App = () => {
           path: "/login",
           element: <LoginPage />,
         },
+        { path: "/addTrip", element: <AddTrip /> },
+        { path: "/trips/:id", element: <TripDetail /> },
+        { path: "/activities", element: <ActivityList /> },
+        { path: "/editActivity/:id", element: <EditActivity /> },
+        { path: "/activities/:id", element: <ActivityDetail /> },
       ],
     },
   ];
