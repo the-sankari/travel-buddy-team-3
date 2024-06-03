@@ -12,7 +12,7 @@ const EditActivity = () => {
   useEffect(() => {
     setIsLoading(true);
     axios
-      .get(`http://localhost:8002/api/activities/${id}`)
+      .get(`http://localhost:8007/api/activities/${id}`)
       .then((response) => {
         setActivity(response.data);
         setIsLoading(false);
@@ -33,7 +33,7 @@ const EditActivity = () => {
     e.preventDefault();
     setIsLoading(true);
     axios
-      .put(`http://localhost:8002/api/activities/${id}`, activity)
+      .put(`http://localhost:8007/api/activities/${id}`, activity)
       .then(() => {
         navigate("/activities");
       })

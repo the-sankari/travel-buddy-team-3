@@ -10,6 +10,8 @@ import EditActivity from "./components/EditActivity";
 import ActivityDetail from "./components/ActivityDetail";
 import TripDetail from "./components/TripDetail";
 import AddTrip from "./components/AddTrip";
+import Itinerary from "./components/Itinerary";
+import EditTrip from "./components/EditTrip"
 
 const App = () => {
   const [initialCoords, setInitialCoords] = useState({
@@ -62,11 +64,14 @@ const App = () => {
           path: "/login",
           element: <LoginPage />,
         },
-        { path: "/addTrip", element: <AddTrip /> },
         { path: "/trips/:id", element: <TripDetail /> },
+        { path: "/addTrip", element: <AddTrip /> },
+        { path: "/edit/:id", element: <EditTrip /> },
+
         { path: "/activities", element: <ActivityList /> },
-        { path: "/editActivity/:id", element: <EditActivity /> },
         { path: "/activities/:id", element: <ActivityDetail /> },
+        { path: "/add", element: <Itinerary /> },
+        { path: "/editActivity/:id", element: <EditActivity /> },
       ],
     },
   ];
