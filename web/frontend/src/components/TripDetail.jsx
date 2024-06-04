@@ -26,14 +26,11 @@ const TripDetail = () => {
         </p>
       </div>
       <div>
-        <h2>Traveler Information</h2>
+        <h2>City Location</h2>
         <div>
           <div>
-            <p>Name: {trip.name}</p>
-            <p>Email: {trip.email}</p>
-            <p>Mobile: {trip.mobile}</p>
-            {/* <p>Longitude: {trip.longitude}</p> */}
-            {/* <p>Latitude: {trip.latitude}</p> */}
+            <p>Longitude: {trip.longitude}</p>
+            <p>Latitude: {trip.latitude}</p>
           </div>
         </div>
       </div>
