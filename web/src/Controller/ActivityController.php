@@ -3,8 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Activity;
-use App\Entity\Trip;
-use DateTimeInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
@@ -41,11 +39,11 @@ class ActivityController extends AbstractController
         $content = $request->getContent();
         $data = json_decode($content, true);
 
-        $dayOne = isset($data['dayOne']) ? (is_array($data['dayOne']) ? json_encode($data['dayOne']) : $data['dayOne']) : null;
-        $dayTwo = isset($data['dayTwo']) ? (is_array($data['dayTwo']) ? json_encode($data['dayTwo']) : $data['dayTwo']) : null;
-        $dayThree = isset($data['dayThree']) ? (is_array($data['dayThree']) ? json_encode($data['dayThree']) : $data['dayThree']) : null;
-        $dayFour = isset($data['dayFour']) ? (is_array($data['dayFour']) ? json_encode($data['dayFour']) : $data['dayFour']) : null;
-        $dayFive = isset($data['dayFive']) ? (is_array($data['dayFive']) ? json_encode($data['dayFive']) : $data['dayFive']) : null;
+        $dayOne = isset($data['dayOne']) ? $data['dayOne'] : null;
+        $dayTwo = isset($data['dayTwo']) ? $data['dayTwo'] : null;
+        $dayThree = isset($data['dayThree']) ? $data['dayThree'] : null;
+        $dayFour = isset($data['dayFour']) ? $data['dayFour'] : null;
+        $dayFive = isset($data['dayFive']) ? $data['dayFive'] : null;
 
         $activity = new Activity();
 
@@ -70,14 +68,12 @@ class ActivityController extends AbstractController
         return $this->json($responseData);
     }
 
-
     #[Route('/activities/{id}', name: 'activity_show', methods: ['GET'])]
     public function show(EntityManagerInterface $entityManager, int $id): JsonResponse
     {
         $activity = $entityManager->getRepository(Activity::class)->find($id);
 
         if (!$activity) {
-
             return $this->json('No trip found for id ' . $id, 404);
         }
 
@@ -111,12 +107,11 @@ class ActivityController extends AbstractController
             return $this->json('No trip found for id ' . $id, 404);
         }
 
-        $activity->setDayOne(trim($dayOne));
-        $activity->setDayTwo(trim($dayTwo));
-        $activity->setDayThree(trim($dayThree));
-        $activity->setDayFour(trim($dayFour));
-        $activity->setDayFive(trim($dayFive));
-
+        $activity->setDayOne($dayOne);
+        $activity->setDayTwo($dayTwo);
+        $activity->setDayThree($dayThree);
+        $activity->setDayFour($dayFour);
+        $activity->setDayFive($dayFive);
 
         $entityManager->persist($activity);
         $entityManager->flush();
@@ -131,7 +126,6 @@ class ActivityController extends AbstractController
         ];
         return $this->json($data);
     }
-
 
     #[Route('/activities/{id}', name: 'activity_delete', methods: ['DELETE'])]
     public function delete(EntityManagerInterface $entityManager, int $id): JsonResponse
