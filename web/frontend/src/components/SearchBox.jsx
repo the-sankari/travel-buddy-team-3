@@ -1,5 +1,5 @@
-import { useState } from "react";
-import Swal from "sweetalert2";
+import { useState, useEffect } from "react";
+
 
 const SearchBox = ({ handleSearch, setCityName, setTravelDates }) => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -26,8 +26,38 @@ const SearchBox = ({ handleSearch, setCityName, setTravelDates }) => {
   //   } catch (error) {
   //     console.error("Error fetching data:", error);
   //   }
+  useEffect(() => {
+    const today = new Date();
+    const minDate = today.toISOString().split("T")[0];
+    document.getElementById("startDate").min = minDate;
+  }, []);
+
+  const handleStartDateChange = (e) => {
+    const selectedStartDate = e.target.value;
+    setStartDate(selectedStartDate);
+    const startDate = new Date(selectedStartDate);
+
+    const maxEndDate = new Date(startDate);
+    maxEndDate.setDate(startDate.getDate() + 5);
+    const maxEndDateString = maxEndDate.toISOString().split("T")[0];
+
+    document.getElementById("endDate").max = maxEndDateString;
+
+    if (new Date(endDate) > maxEndDate) {
+      setEndDate(maxEndDateString);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!searchTerm.trim()) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Please insert your destination.",
+      });
+      return;
+    }
 
     const start = new Date(startDate);
     const end = new Date(endDate);
@@ -40,27 +70,7 @@ const SearchBox = ({ handleSearch, setCityName, setTravelDates }) => {
       });
       return;
     }
-    if (start > end) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Start date should be before or the same as the end date.",
-      });
-      return;
-    }
-
-    const differenceInTime = end.getTime() - start.getTime();
-    const differenceInDays = differenceInTime / (1000 * 3600 * 24);
-
-    if (differenceInDays > 5) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Start date to end date should not be more than 5 days.",
-      });
-      return;
-    }
-
+    
     // Construct an array of date stamps between start and end dates
     const travelDatesArray = [];
     const currentDate = new Date(start);
@@ -109,7 +119,7 @@ const SearchBox = ({ handleSearch, setCityName, setTravelDates }) => {
               aria-label="Username"
               aria-describedby="basic-addon1"
               value={startDate}
-              onChange={(e) => setStartDate(e.target.value)}
+              onChange={handleStartDateChange}
             />
           </div>
           <div className="input-group col mb-3">
@@ -125,6 +135,7 @@ const SearchBox = ({ handleSearch, setCityName, setTravelDates }) => {
               aria-label="Username"
               aria-describedby="basic-addon1"
               value={endDate}
+              min={startDate}
               onChange={(e) => setEndDate(e.target.value)}
             />
           </div>
