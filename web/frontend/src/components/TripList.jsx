@@ -49,12 +49,9 @@ const TripList = () => {
       <table className="table table-borderless">
         <thead className="table-light">
           <tr className="align-bottom">
-            <th>Name</th>
             <th>Destination</th>
             <th>Check In</th>
             <th>Check Out</th>
-            <th>E-mail</th>
-            <th>Mobile</th>
             <th>Longitude</th>
             <th>Latitude</th>
             <th>Actions</th>
@@ -63,12 +60,9 @@ const TripList = () => {
         <tbody className="custom-position">
           {trips.map((trip) => (
             <tr className="align-middle" key={trip.id}>
-              <td>{trip.name}</td>
               <td>{trip.destination}</td>
               <td>{trip.checkIn}</td>
               <td>{trip.checkOut}</td>
-              <td>{trip.email}</td>
-              <td>{trip.mobile}</td>
               <td>{trip.longitude}</td>
               <td>{trip.latitude}</td>
               <td className="d-flex gap-1">
