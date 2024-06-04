@@ -15,9 +15,6 @@ class Trip
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $name = null;
-
-    #[ORM\Column(length: 255)]
     private ?string $destination = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
@@ -25,12 +22,6 @@ class Trip
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $checkOut = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $email = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $mobile = null;
 
     #[ORM\Column]
     private ?float $longitude = null;
@@ -41,18 +32,6 @@ class Trip
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): static
-    {
-        $this->name = $name;
-
-        return $this;
     }
 
     public function getDestination(): ?string
@@ -87,30 +66,6 @@ class Trip
     public function setCheckOut(\DateTimeInterface $checkOut): static
     {
         $this->checkOut = $checkOut;
-
-        return $this;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(?string $email): static
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    public function getMobile(): ?string
-    {
-        return $this->mobile;
-    }
-
-    public function setMobile(?string $mobile): static
-    {
-        $this->mobile = $mobile;
 
         return $this;
     }
