@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -8,8 +8,35 @@ const SearchBox = ({ handleSearch, setCityName, setTravelDates, lat, lon }) => {
   const [checkOut, setCheckOut] = useState("");
   const navigate = useNavigate();
 
+  useEffect(() => {
+    // Clear checkout date if it's out of the valid range when check-in date changes
+    if (checkIn) {
+      const checkInDate = new Date(checkIn);
+      const maxCheckOutDate = new Date(checkInDate);
+      maxCheckOutDate.setDate(maxCheckOutDate.getDate() + 5);
+
+      if (checkOut) {
+        const checkOutDate = new Date(checkOut);
+        if (checkOutDate > maxCheckOutDate || checkOutDate < checkInDate) {
+          setCheckOut("");
+        }
+      }
+    } else {
+      setCheckOut("");
+    }
+  }, [checkIn]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // Sweet alert if the user didn't select any destination
+    if (!searchTerm) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Please enter a destination.",
+      });
+      return;
+    }
 
     const start = new Date(checkIn);
     const end = new Date(checkOut);
@@ -19,26 +46,6 @@ const SearchBox = ({ handleSearch, setCityName, setTravelDates, lat, lon }) => {
         icon: "error",
         title: "Oops...",
         text: "Please select both start and end dates.",
-      });
-      return;
-    }
-    if (start > end) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Start date should be before or the same as the end date.",
-      });
-      return;
-    }
-
-    const differenceInTime = end.getTime() - start.getTime();
-    const differenceInDays = differenceInTime / (1000 * 3600 * 24);
-
-    if (differenceInDays > 5) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Start date to end date should not be more than 5 days.",
       });
       return;
     }
@@ -70,6 +77,21 @@ const SearchBox = ({ handleSearch, setCityName, setTravelDates, lat, lon }) => {
     navigate("/planner", {
       state: { checkIn, checkOut, longitude: lon, latitude: lat },
     });
+  };
+  // calculates the maximum allowed check-out date based on the selected check-in date
+  const getMaxCheckOutDate = () => {
+    if (checkIn) {
+      const checkInDate = new Date(checkIn);
+      const maxCheckOutDate = new Date(checkInDate);
+      maxCheckOutDate.setDate(maxCheckOutDate.getDate() + 4);
+      return maxCheckOutDate.toISOString().split("T")[0];
+    }
+    return "";
+  };
+// This function didn't allow user to select checkIn day earlier than the current day.
+  const getTodayDate = () => {
+    const today = new Date();
+    return today.toISOString().split("T")[0];
   };
 
   return (
@@ -106,6 +128,7 @@ const SearchBox = ({ handleSearch, setCityName, setTravelDates, lat, lon }) => {
               aria-describedby="basic-addon1"
               value={checkIn}
               onChange={(e) => setCheckIn(e.target.value)}
+              min={getTodayDate()}
             />
           </div>
           <div className="input-group col mb-3">
@@ -120,6 +143,9 @@ const SearchBox = ({ handleSearch, setCityName, setTravelDates, lat, lon }) => {
               aria-describedby="basic-addon1"
               value={checkOut}
               onChange={(e) => setCheckOut(e.target.value)}
+              min={checkIn}
+              max={getMaxCheckOutDate()}
+              disabled={!checkIn} // if the user didn't select the checkin date then not able to select the checkout date.
             />
           </div>
         </div>
