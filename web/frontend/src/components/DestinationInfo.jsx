@@ -120,7 +120,7 @@ const DestinationInfo = ({ countryName, displayedCityName, timezone }) => {
             <p>
               🕗 <strong>Time:</strong> {destinationTime} (
               {timeDifference.difference} hours{" "}
-              {timeDifference.isAhead ? "ahead" : "behind"} of local time)
+              {timeDifference.isAhead ? "ahead" : "behind"})
             </p>
           )}
           {/* If country has left hand traffic, render this: */}
