@@ -97,18 +97,18 @@ const DestinationInfo = ({ countryName, displayedCityName, timezone }) => {
           {/* Don't render capital if current destination is the capital: */}
           {countryData.capital != displayedCityName && (
             <p>
-              <strong>🏙️ Capital:</strong>{" "}
+              🏙️ <strong>Capital:</strong>{" "}
               {countryData.capital ? countryData.capital : "N/A"}
             </p>
           )}
           <p>
-            <strong>💬 Languages:</strong>{" "}
+            💬 <strong>Languages:</strong>{" "}
             {countryData.languages
               ? Object.values(countryData.languages).join(", ")
               : "N/A"}
           </p>
           <p>
-            <strong>💸 Currency:</strong>{" "}
+            💸 <strong>Currency:</strong>{" "}
             {countryData.currencies
               ? Object.keys(countryData.currencies).join(", ")
               : "N/A"}
@@ -118,13 +118,16 @@ const DestinationInfo = ({ countryName, displayedCityName, timezone }) => {
           {/* Don't render timezone difference if no difference to user location: */}
           {timeDifference && timeDifference.difference !== 0 && (
             <p>
-              Time: {destinationTime} ({timeDifference.difference} hours{" "}
+              <strong>Time:</strong> {destinationTime} (
+              {timeDifference.difference} hours{" "}
               {timeDifference.isAhead ? "ahead" : "behind"} of local time)
             </p>
           )}
           {/* If country has left hand traffic, render this: */}
           {countryData.car && countryData.car.side === "left" && (
-            <p>Notice: 🚗 Left-hand traffic!</p>
+            <p>
+              <strong>Notice:</strong> 🚗 Left-hand traffic!
+            </p>
           )}
         </div>
         <div>
