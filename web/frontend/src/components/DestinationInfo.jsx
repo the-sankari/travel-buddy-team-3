@@ -94,27 +94,35 @@ const DestinationInfo = ({ countryName, displayedCityName, timezone }) => {
       </h1>
       <div className="country-data">
         <div className="country-data_item_1">
-          <p>Capital: {countryData.capital ? countryData.capital : "N/A"}</p>
+          {/* Don't render capital if current destination is the capital: */}
+          {countryData.capital != displayedCityName && (
+            <p>
+              <strong>🏙️ Capital:</strong>{" "}
+              {countryData.capital ? countryData.capital : "N/A"}
+            </p>
+          )}
           <p>
-            Languages:{" "}
+            <strong>💬 Languages:</strong>{" "}
             {countryData.languages
               ? Object.values(countryData.languages).join(", ")
               : "N/A"}
           </p>
           <p>
-            Currency:{" "}
+            <strong>💸 Currency:</strong>{" "}
             {countryData.currencies
               ? Object.keys(countryData.currencies).join(", ")
               : "N/A"}
           </p>
         </div>
         <div className="country-data_item_2">
+          {/* Don't render timezone difference if no difference to user location: */}
           {timeDifference && timeDifference.difference !== 0 && (
             <p>
               Time: {destinationTime} ({timeDifference.difference} hours{" "}
               {timeDifference.isAhead ? "ahead" : "behind"} of local time)
             </p>
           )}
+          {/* If country has left hand traffic, render this: */}
           {countryData.car && countryData.car.side === "left" && (
             <p>Notice: 🚗 Left-hand traffic!</p>
           )}
@@ -122,7 +130,7 @@ const DestinationInfo = ({ countryName, displayedCityName, timezone }) => {
         <div>
           <WikipediaText articleTitle={displayedCityName} />
           <p>
-            Check out{" "}
+            📖 Check out{" "}
             <a
               href={`https://en.wikivoyage.org/wiki/${displayedCityName}`}
               target="_blank"

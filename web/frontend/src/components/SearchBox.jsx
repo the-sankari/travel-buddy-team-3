@@ -17,6 +17,27 @@ const SearchBox = ({ handleSearch, setCityName, setTravelDates }) => {
     setStartDate(selectedStartDate);
     const startDate = new Date(selectedStartDate);
 
+
+  //     if (weatherResponse.data.coord) {
+  //       setCoordinates({
+  //         longitude: weatherResponse.data.coord.lon,
+  //         latitude: weatherResponse.data.coord.lat,
+  //       });
+  //     }
+  //   } catch (error) {
+  //     console.error("Error fetching data:", error);
+  //   }
+  useEffect(() => {
+    const today = new Date();
+    const minDate = today.toISOString().split("T")[0];
+    document.getElementById("startDate").min = minDate;
+  }, []);
+
+  const handleStartDateChange = (e) => {
+    const selectedStartDate = e.target.value;
+    setStartDate(selectedStartDate);
+    const startDate = new Date(selectedStartDate);
+
     const maxEndDate = new Date(startDate);
     maxEndDate.setDate(startDate.getDate() + 5);
     const maxEndDateString = maxEndDate.toISOString().split("T")[0];
