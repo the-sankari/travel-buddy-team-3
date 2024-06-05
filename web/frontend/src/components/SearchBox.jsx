@@ -1,67 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-
-const SearchBox = ({ handleSearch, setCityName, setTravelDates }) => {
+const SearchBox = ({ handleSearch, setCityName, setTravelDates, lat, lon }) => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  
-  useEffect(() => {
-    const today = new Date();
-    const minDate = today.toISOString().split("T")[0];
-    document.getElementById("startDate").min = minDate;
-  }, []);
+  const [checkIn, setCheckIn] = useState("");
+  const [checkOut, setCheckOut] = useState("");
+  const navigate = useNavigate();
 
-  const handleStartDateChange = (e) => {
-    const selectedStartDate = e.target.value;
-    setStartDate(selectedStartDate);
-    const startDate = new Date(selectedStartDate);
-
-
-  //     if (weatherResponse.data.coord) {
-  //       setCoordinates({
-  //         longitude: weatherResponse.data.coord.lon,
-  //         latitude: weatherResponse.data.coord.lat,
-  //       });
-  //     }
-  //   } catch (error) {
-  //     console.error("Error fetching data:", error);
-  //   }
-  useEffect(() => {
-    const today = new Date();
-    const minDate = today.toISOString().split("T")[0];
-    document.getElementById("startDate").min = minDate;
-  }, []);
-
-  const handleStartDateChange = (e) => {
-    const selectedStartDate = e.target.value;
-    setStartDate(selectedStartDate);
-    const startDate = new Date(selectedStartDate);
-
-    const maxEndDate = new Date(startDate);
-    maxEndDate.setDate(startDate.getDate() + 5);
-    const maxEndDateString = maxEndDate.toISOString().split("T")[0];
-
-    document.getElementById("endDate").max = maxEndDateString;
-
-    if (new Date(endDate) > maxEndDate) {
-      setEndDate(maxEndDateString);
-    }
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!searchTerm.trim()) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Please insert your destination.",
-      });
-      return;
-    }
 
-    const start = new Date(startDate);
-    const end = new Date(endDate);
+    const start = new Date(checkIn);
+    const end = new Date(checkOut);
 
     if (isNaN(start.getTime()) || isNaN(end.getTime())) {
       Swal.fire({
@@ -71,8 +22,27 @@ const SearchBox = ({ handleSearch, setCityName, setTravelDates }) => {
       });
       return;
     }
-    
-    // Construct an array of date stamps between start and end dates
+    if (start > end) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Start date should be before or the same as the end date.",
+      });
+      return;
+    }
+
+    const differenceInTime = end.getTime() - start.getTime();
+    const differenceInDays = differenceInTime / (1000 * 3600 * 24);
+
+    if (differenceInDays > 5) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Start date to end date should not be more than 5 days.",
+      });
+      return;
+    }
+
     const travelDatesArray = [];
     const currentDate = new Date(start);
     while (currentDate <= end) {
@@ -82,11 +52,28 @@ const SearchBox = ({ handleSearch, setCityName, setTravelDates }) => {
 
     setTravelDates(travelDatesArray);
     setCityName(searchTerm);
-    handleSearch(searchTerm);
+
+    try {
+      const response = await axios.post("http://localhost:8007/api/trips", {
+        destination: searchTerm,
+        checkIn: checkIn,
+        checkOut: checkOut,
+        longitude: lon,
+        latitude: lat,
+      });
+      console.log(response.data);
+      handleSearch(searchTerm); // Move this inside the try block
+    } catch (error) {
+      console.error("There was an error creating the trip!", error);
+    }
+
+    navigate("/planner", {
+      state: { checkIn, checkOut, longitude: lon, latitude: lat },
+    });
   };
 
   return (
-    <div className=" search-container">
+    <div className="search-container">
       <form onSubmit={handleSubmit}>
         <div className="input-group mb-3">
           <input
@@ -113,14 +100,12 @@ const SearchBox = ({ handleSearch, setCityName, setTravelDates }) => {
             </span>
             <input
               type="date"
-              id="startDate"
-              name="startDate"
+              id="checkin"
+              name="checkin"
               className="form-control"
-              placeholder="Username"
-              aria-label="Username"
               aria-describedby="basic-addon1"
-              value={startDate}
-              onChange={handleStartDateChange}
+              value={checkIn}
+              onChange={(e) => setCheckIn(e.target.value)}
             />
           </div>
           <div className="input-group col mb-3">
@@ -129,15 +114,12 @@ const SearchBox = ({ handleSearch, setCityName, setTravelDates }) => {
             </span>
             <input
               type="date"
-              id="endDate"
-              name="endDate"
+              id="checkout"
+              name="checkout"
               className="form-control"
-              placeholder="Username"
-              aria-label="Username"
               aria-describedby="basic-addon1"
-              value={endDate}
-              min={startDate}
-              onChange={(e) => setEndDate(e.target.value)}
+              value={checkOut}
+              onChange={(e) => setCheckOut(e.target.value)}
             />
           </div>
         </div>
@@ -145,4 +127,5 @@ const SearchBox = ({ handleSearch, setCityName, setTravelDates }) => {
     </div>
   );
 };
+
 export default SearchBox;
