@@ -118,7 +118,7 @@ const DestinationInfo = ({ countryName, displayedCityName, timezone }) => {
           {/* Don't render timezone difference if no difference to user location: */}
           {timeDifference && timeDifference.difference !== 0 && (
             <p>
-              <strong>Time:</strong> {destinationTime} (
+              🕗 <strong>Time:</strong> {destinationTime} (
               {timeDifference.difference} hours{" "}
               {timeDifference.isAhead ? "ahead" : "behind"} of local time)
             </p>
