@@ -60,17 +60,6 @@ const EditTrip = () => {
         <h1>Edit Trip</h1>
         {error && <p className="error">{error}</p>}
         <div className="mb-2">
-          <label htmlFor="name">Name</label>
-          <input
-            id="name"
-            type="text"
-            name="name"
-            value={trip.name}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div className="mb-2">
           <label htmlFor="destination">Destination</label>
           <input
             id="destination"
@@ -99,28 +88,6 @@ const EditTrip = () => {
             id="checkout"
             name="checkOut"
             value={trip.checkOut}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div className="mb-2">
-          <label htmlFor="email">E-mail</label>
-          <input
-            id="email"
-            type="email"
-            name="email"
-            value={trip.email}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div className="mb-2">
-          <label htmlFor="mobile">Mobile</label>
-          <input
-            id="mobile"
-            type="text"
-            name="mobile"
-            value={trip.mobile}
             onChange={handleInputChange}
             required
           />

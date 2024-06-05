@@ -2,9 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Activity;
 use App\Entity\Trip;
-use DateTimeInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,26 +12,6 @@ use Symfony\Component\HttpFoundation\Request;
 #[Route('/api', name: 'api_')]
 class TripController extends AbstractController
 {
-    // Masking helper function
-    private function maskSensitiveData(array $tripData): array
-    {
-        // Mask email
-        $email = $tripData['email'];
-        $emailParts = explode('@', $email);
-        if (strlen($emailParts[0]) > 2) {
-            $emailParts[0] = substr($emailParts[0], 0, 2) . str_repeat('*', strlen($emailParts[0]) - 2);
-        }
-        $tripData['email'] = implode('@', $emailParts);
-
-        // Mask mobile
-        $mobile = $tripData['mobile'];
-        if (strlen($mobile) > 4) {
-            $tripData['mobile'] = str_repeat('*', strlen($mobile) - 4) . substr($mobile, -4);
-        }
-
-        return $tripData;
-    }
-
     #[Route('/trips', name: 'trip_index', methods: ['GET'])]
     public function index(EntityManagerInterface $entityManager): JsonResponse
     {
@@ -47,15 +25,11 @@ class TripController extends AbstractController
                 'destination' => $trip->getDestination(),
                 'checkIn' => $trip->getCheckIn()->format('Y-m-d'),
                 'checkOut' => $trip->getCheckOut()->format('Y-m-d'),
-                'name' => $trip->getName(),
-                'email' => $trip->getEmail(),
-                'mobile' => $trip->getMobile(),
                 'longitude' => $trip->getLongitude(),
                 'latitude' => $trip->getLatitude()
             ];
 
-            // Mask sensitive data
-            $data[] = $this->maskSensitiveData($tripData);
+            $data[] = $tripData;
         }
 
         return $this->json($data);
@@ -70,9 +44,6 @@ class TripController extends AbstractController
         $destination = $data['destination'] ?? null;
         $checkIn = $data['checkIn'] ?? null;
         $checkOut = $data['checkOut'] ?? null;
-        $name = $data['name'] ?? null;
-        $email = $data['email'] ?? null;
-        $mobile = $data['mobile'] ?? null;
         $longitude = $data['longitude'] ?? null;
         $latitude = $data['latitude'] ?? null;
 
@@ -80,9 +51,6 @@ class TripController extends AbstractController
         $trip->setDestination(trim($destination));
         $trip->setCheckIn(new \DateTime($checkIn));
         $trip->setCheckOut(new \DateTime($checkOut));
-        $trip->setName(trim($name));
-        $trip->setEmail($email);
-        $trip->setMobile($mobile);
         $trip->setLongitude($longitude);
         $trip->setLatitude($latitude);
 
@@ -94,15 +62,9 @@ class TripController extends AbstractController
             'destination' => $trip->getDestination(),
             'checkIn' => $trip->getCheckIn()->format('Y-m-d'),
             'checkOut' => $trip->getCheckOut()->format('Y-m-d'),
-            'name' => $trip->getName(),
-            'email' => $trip->getEmail(),
-            'mobile' => $trip->getMobile(),
             'longitude' => $trip->getLongitude(),
             'latitude' => $trip->getLatitude()
         ];
-
-        // Mask sensitive data
-        $tripData = $this->maskSensitiveData($tripData);
 
         return $this->json($tripData);
     }
@@ -121,15 +83,9 @@ class TripController extends AbstractController
             'destination' => $trip->getDestination(),
             'checkIn' => $trip->getCheckIn()->format('Y-m-d'),
             'checkOut' => $trip->getCheckOut()->format('Y-m-d'),
-            'name' => $trip->getName(),
-            'email' => $trip->getEmail(),
-            'mobile' => $trip->getMobile(),
             'longitude' => $trip->getLongitude(),
             'latitude' => $trip->getLatitude()
         ];
-
-        // Mask sensitive data
-        $tripData = $this->maskSensitiveData($tripData);
 
         return $this->json($tripData);
     }
@@ -143,9 +99,6 @@ class TripController extends AbstractController
         $destination = $data['destination'] ?? null;
         $checkIn = $data['checkIn'] ?? null;
         $checkOut = $data['checkOut'] ?? null;
-        $name = $data['name'] ?? null;
-        $email = $data['email'] ?? null;
-        $mobile = $data['mobile'] ?? null;
         $longitude = $data['longitude'] ?? null;
         $latitude = $data['latitude'] ?? null;
 
@@ -158,13 +111,6 @@ class TripController extends AbstractController
         $trip->setDestination(trim($destination));
         $trip->setCheckIn(new \DateTime($checkIn));
         $trip->setCheckOut(new \DateTime($checkOut));
-        $trip->setName(trim($name));
-        if ($email !== null) {
-            $trip->setEmail($email);
-        }
-        if ($mobile !== null) {
-            $trip->setMobile($mobile);
-        }
         $trip->setLongitude($longitude);
         $trip->setLatitude($latitude);
 
@@ -176,15 +122,9 @@ class TripController extends AbstractController
             'destination' => $trip->getDestination(),
             'checkIn' => $trip->getCheckIn()->format('Y-m-d'),
             'checkOut' => $trip->getCheckOut()->format('Y-m-d'),
-            'name' => $trip->getName(),
-            'email' => $trip->getEmail(),
-            'mobile' => $trip->getMobile(),
             'longitude' => $trip->getLongitude(),
             'latitude' => $trip->getLatitude()
         ];
-
-        // Mask sensitive data
-        $tripData = $this->maskSensitiveData($tripData);
 
         return $this->json($tripData);
     }

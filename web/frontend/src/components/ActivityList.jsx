@@ -64,10 +64,10 @@ const ActivityList = () => {
 
   return (
     <div>
-      <h1 className="text-center">Journey List</h1>
+      <h1 className="text-center">Activity List</h1>
       <Link to="/add">
         <button className="btn btn-success btn-sm btn-position">
-          New Activity
+          Create
         </button>
       </Link>
       <table className="table table-borderless">

@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import SearchBox from "../components/SearchBox";
 import Itinerary from "../components/Itinerary";
-import image4 from "../assets/images/itinerarybox.png";
 import DestinationCard from "../components/DestinationCard";
 import Forecast from "../components/Forecast";
 import CurrentWeatherCard from "../components/CurrentWeatherCard";
@@ -63,44 +62,43 @@ const TripPlanner = ({ initialCoords }) => {
   }, [lat, lon]);
 
   return (
-    <>
-      <div className="container trip-planner">
-        <div className="left">
-          <div className="searchbox-current-weather">
-            <div className="searchbox-card">
-              <SearchBox
-                handleSearch={handleSearch}
-                setCityName={setCityName}
-                setTravelDates={setTravelDates}
-              />
-            </div>
-            <div className="current-weather">
-              {currentWeather && (
-                <CurrentWeatherCard currentWeather={currentWeather} />
-              )}
-            </div>
+    <div className="container trip-planner">
+      <div className="left">
+        <div className="searchbox-current-weather">
+          <div className="searchbox-card">
+            <SearchBox
+              handleSearch={handleSearch}
+              setCityName={setCityName}
+              setTravelDates={setTravelDates}
+              lat={lat}
+              lon={lon}
+            />
           </div>
-          <div className="weather-forecast">
-            {lat && lon && <Forecast lat={lat} lon={lon} />}
-          </div>
-          <div className="itinerary-planner">
-            <h4>Itinerary Planner</h4>
-            <Itinerary travelDates={travelDates} />
-            {/* <img src={image4} alt="" /> */}
+          <div className="current-weather">
+            {currentWeather && (
+              <CurrentWeatherCard currentWeather={currentWeather} />
+            )}
           </div>
         </div>
-        <div className="destination-card">
-          <DestinationCard
-            countryName={countryName}
-            displayedCityName={displayedCityName}
-            lat={lat}
-            lon={lon}
-            mapRef={mapRef}
-            timezone={timezone}
-          />
+        <div className="weather-forecast">
+          {lat && lon && <Forecast lat={lat} lon={lon} />}
+        </div>
+        <div className="itinerary-planner">
+          <h4>Itinerary Planner</h4>
+          <Itinerary travelDates={travelDates} />
         </div>
       </div>
-    </>
+      <div className="destination-card">
+        <DestinationCard
+          countryName={countryName}
+          displayedCityName={displayedCityName}
+          lat={lat}
+          lon={lon}
+          mapRef={mapRef}
+          timezone={timezone}
+        />
+      </div>
+    </div>
   );
 };
 

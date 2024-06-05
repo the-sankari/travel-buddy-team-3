@@ -1,70 +1,48 @@
-// /* eslint-disable no-unused-vars */
-// import React, { useState } from "react";
-
-// const Itinerary = () => {
-//   const [itinerary, setItinerary] = useState([]);
-
-//   const addActivity = (activity) => {
-//     setItinerary([...itinerary, activity]);
-//   };
-
-//   return (
-//     <div className="container">
-//       <h2>Plan Your Trip</h2>
-//       <ul className="list-group">
-//         {itinerary.map((activity, index) => (
-//           <li className="list-group-item" key={index}>
-//             {index + 1}. {activity}
-//           </li>
-//         ))}
-//       </ul>
-//       <div className="form-floating">
-//         <input
-//           className="form-control"
-//           id="floatingInput"
-//           type="text"
-//           placeholder="Add an activity"
-//           onKeyDown={(e) => {
-//             if (e.key === "Enter" && e.target.value) {
-//               addActivity(e.target.value);
-//               e.target.value = "";
-//             }
-//           }}
-//         />
-//         <label htmlFor="floatingInput">Add an activity</label>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Itinerary;
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
-const Itinerary = ({ travelDates }) => {
-  const [activities, setActivities] = useState({
-    dayOne: "",
-    dayTwo: "",
-    dayThree: "",
-    dayFour: "",
-    dayFive: "",
-  });
+const Itinerary = () => {
+  const location = useLocation();
+  const { checkIn, checkOut } = location.state || {};
+  const [activities, setActivities] = useState({});
   const [currentActivity, setCurrentActivity] = useState("");
-  const [selectedDay, setSelectedDay] = useState("dayOne");
+  const [selectedDay, setSelectedDay] = useState("");
+  const [days, setDays] = useState([]);
   const navigate = useNavigate();
 
-  console.log(`travelDates received by Itinerary: ${travelDates}`);
+  useEffect(() => {
+    if (checkIn && checkOut) {
+      const generateDays = () => {
+        const start = new Date(checkIn);
+        const end = new Date(checkOut);
+        const dateArray = [];
+        let currentDate = start;
+
+        while (currentDate <= end) {
+          dateArray.push(new Date(currentDate));
+          currentDate.setDate(currentDate.getDate() + 1);
+        }
+
+        setDays(dateArray);
+        setSelectedDay(dateArray[0]?.toISOString().split("T")[0] || "");
+      };
+
+      generateDays();
+    }
+  }, [checkIn, checkOut]);
 
   const handleAddActivity = (e) => {
     e.preventDefault();
-    setActivities((prevActivities) => ({
-      ...prevActivities,
-      [selectedDay]: prevActivities[selectedDay]
-        ? `${prevActivities[selectedDay]}, ${currentActivity}`
-        : currentActivity,
-    }));
-    setCurrentActivity("");
+    if (currentActivity.trim()) {
+      setActivities((prevActivities) => ({
+        ...prevActivities,
+        [selectedDay]: prevActivities[selectedDay]
+          ? `${prevActivities[selectedDay]}, ${currentActivity}`
+          : currentActivity,
+      }));
+      setCurrentActivity("");
+    }
   };
 
   const handleDeleteActivity = (day, activity) => {
@@ -79,19 +57,22 @@ const Itinerary = ({ travelDates }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const formattedActivities = {
+      dayOne: activities[days[0]?.toISOString().split("T")[0]] || null,
+      dayTwo: activities[days[1]?.toISOString().split("T")[0]] || null,
+      dayThree: activities[days[2]?.toISOString().split("T")[0]] || null,
+      dayFour: activities[days[3]?.toISOString().split("T")[0]] || null,
+      dayFive: activities[days[4]?.toISOString().split("T")[0]] || null,
+    };
+    console.log("Formatted Activities:", formattedActivities); // Debug log
     axios
-      .post("http://localhost:8007/api/activities", activities)
+      .post("http://localhost:8007/api/activities", formattedActivities)
       .then((response) => {
         console.log("Success:", response.data);
-        setActivities({
-          dayOne: "",
-          dayTwo: "",
-          dayThree: "",
-          dayFour: "",
-          dayFive: "",
-        });
+        setActivities({});
         setCurrentActivity("");
-        setSelectedDay("dayOne");
+        setDays([]);
+        setSelectedDay("");
         navigate("/planner");
       })
       .catch((error) => console.error("Error:", error));
@@ -99,23 +80,22 @@ const Itinerary = ({ travelDates }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      {/* <h1>To Do List</h1> */}
       <div>
-        <label htmlFor="day"></label>
+        <label htmlFor="day">Select Day:</label>
         <select
           id="day"
           value={selectedDay}
           onChange={(e) => setSelectedDay(e.target.value)}
         >
-          <option value="dayOne">Day One</option>
-          <option value="dayTwo">Day Two</option>
-          <option value="dayThree">Day Three</option>
-          <option value="dayFour">Day Four</option>
-          <option value="dayFive">Day Five</option>
+          {days.map((day, index) => (
+            <option key={index} value={day.toISOString().split("T")[0]}>
+              {day.toDateString()}
+            </option>
+          ))}
         </select>
       </div>
       <div>
-        <label htmlFor="activity"></label>
+        <label htmlFor="activity">Activity:</label>
         <input
           id="activity"
           value={currentActivity}
@@ -132,7 +112,7 @@ const Itinerary = ({ travelDates }) => {
       {Object.keys(activities).map((day) =>
         activities[day] ? (
           <div key={day}>
-            <h3>{day.replace("day", "Day ")}</h3>
+            <h3>{new Date(day).toDateString()}</h3>
             <ol>
               {activities[day]
                 .split(", ")
@@ -153,7 +133,7 @@ const Itinerary = ({ travelDates }) => {
         ) : null
       )}
       <button className="btn btn-success btn-sm mt-2" type="submit">
-        Submit
+        Save
       </button>
     </form>
   );

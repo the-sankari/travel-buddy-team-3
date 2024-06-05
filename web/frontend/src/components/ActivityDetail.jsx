@@ -10,7 +10,7 @@ const ActivityDetail = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8002/api/activities/${id}`)
+      .get(`http://localhost:8007/api/activities/${id}`)
       .then((response) => {
         setActivity(response.data);
         setLoading(false);

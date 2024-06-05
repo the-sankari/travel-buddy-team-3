@@ -5,17 +5,18 @@ const SearchBox = ({ handleSearch, setCityName, setTravelDates }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  // const [weather, setWeather] = useState(null);
-  // const [countryInfo, setCountryInfo] = useState(null);
-  // const [coordinates, setCoordinates] = useState({ longitude: 0, latitude: 0 });
+  
+  useEffect(() => {
+    const today = new Date();
+    const minDate = today.toISOString().split("T")[0];
+    document.getElementById("startDate").min = minDate;
+  }, []);
 
-  // const handleSearch = async () => {
-  //   try {
-  //     const weatherResponse = await getWeather(searchTerm);
-  //     setWeather(weatherResponse.data);
+  const handleStartDateChange = (e) => {
+    const selectedStartDate = e.target.value;
+    setStartDate(selectedStartDate);
+    const startDate = new Date(selectedStartDate);
 
-  //     const countryResponse = await getCountryInfo(searchTerm);
-  //     setCountryInfo(countryResponse.data[0]);
 
   //     if (weatherResponse.data.coord) {
   //       setCoordinates({
