@@ -133,7 +133,7 @@ const DestinationInfo = ({ countryName, displayedCityName, timezone }) => {
         <div>
           <WikipediaText articleTitle={displayedCityName} />
           <p>
-            📖 Check out{" "}
+            📖 <strong>Check out</strong>{" "}
             <a
               href={`https://en.wikivoyage.org/wiki/${displayedCityName}`}
               target="_blank"
