@@ -59,7 +59,7 @@ const DestinationInfo = ({ countryName, displayedCityName, timezone }) => {
         }
 
         setCountryData(country);
-        console.log(countryData);
+        console.log("Fetched Country Data:", country);
 
         // Calculate time difference using the provided timezone offset in seconds
         const difference = calculateTimeDifference(timezone);
