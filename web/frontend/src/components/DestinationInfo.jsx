@@ -37,7 +37,7 @@ const DestinationInfo = ({ countryName, displayedCityName, timezone }) => {
 
   useEffect(() => {
     const fetchCountryData = async () => {
-      const url = `https://restcountries.com/v3.1/name/${countryName}?fields=name,flag,capital,currencies,languages,timezones,car`;
+      const url = "/countryData.json";
 
       try {
         setLoading(true);
@@ -46,11 +46,20 @@ const DestinationInfo = ({ countryName, displayedCityName, timezone }) => {
         const response = await axios.get(url);
 
         if (!response.data.length) {
+          throw new Error("Country data not found");
+        }
+
+        const country = response.data.find(
+          (country) =>
+            country.name.common.toLowerCase() === countryName.toLowerCase()
+        );
+
+        if (!country) {
           throw new Error("Country not found");
         }
 
-        setCountryData(response.data[0]);
-        console.log(response.data[0]);
+        setCountryData(country);
+        console.log(countryData);
 
         // Calculate time difference using the provided timezone offset in seconds
         const difference = calculateTimeDifference(timezone);
