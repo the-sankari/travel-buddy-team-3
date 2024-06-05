@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 
+
 const SearchBox = ({ handleSearch, setCityName, setTravelDates }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [startDate, setStartDate] = useState("");
@@ -49,7 +50,7 @@ const SearchBox = ({ handleSearch, setCityName, setTravelDates }) => {
       });
       return;
     }
-
+    
     // Construct an array of date stamps between start and end dates
     const travelDatesArray = [];
     const currentDate = new Date(start);
