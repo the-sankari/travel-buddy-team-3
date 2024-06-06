@@ -5,7 +5,7 @@ const Hero = () => {
     <section className="homepage-hero component-index-1 bg-white">
       <style>{/* CSS styles */}</style>
       <div className="hero-video--overlay behave-as-bg">
-        <div className="hero-text">BBN: Be Back Never</div>
+        <div className="hero-text">Explore the World</div>
         <div className="hero-btns">
           <p className="hero-text-p">Want to know how?</p>
           <Link to="/planner" className="hero-btn-plan">get started</Link>
