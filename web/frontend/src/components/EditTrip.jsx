@@ -55,13 +55,16 @@ const EditTrip = () => {
   }
 
   return (
-    <div>
-      <form onSubmit={handleSave}>
+    <div style={{ display: "flex", justifyContent: "left" }}>
+      <form onSubmit={handleSave} style={{ width: "400px" }}>
         <h1>Edit Trip</h1>
         {error && <p className="error">{error}</p>}
         <div className="mb-2">
-          <label htmlFor="destination">Destination</label>
+          <label htmlFor="destination" className="form-label">
+            Destination
+          </label>
           <input
+            className="form-control"
             id="destination"
             type="text"
             name="destination"
@@ -71,8 +74,11 @@ const EditTrip = () => {
           />
         </div>
         <div className="mb-2">
-          <label htmlFor="checkin">Check In</label>
+          <label htmlFor="checkin" className="form-label">
+            Check In
+          </label>
           <input
+            className="form-control"
             type="date"
             id="checkin"
             name="checkIn"
@@ -82,8 +88,11 @@ const EditTrip = () => {
           />
         </div>
         <div className="mb-2">
-          <label htmlFor="checkout">Check Out</label>
+          <label htmlFor="checkout" className="form-label">
+            Check Out
+          </label>
           <input
+            className="form-control"
             type="date"
             id="checkout"
             name="checkOut"
@@ -93,8 +102,11 @@ const EditTrip = () => {
           />
         </div>
         <div className="mb-2">
-          <label htmlFor="longitude">Longitude</label>
+          <label htmlFor="longitude" className="form-label">
+            Longitude
+          </label>
           <input
+            className="form-control"
             id="longitude"
             type="number"
             name="longitude"
@@ -105,8 +117,11 @@ const EditTrip = () => {
           />
         </div>
         <div className="mb-2">
-          <label htmlFor="latitude">Latitude</label>
+          <label htmlFor="latitude" className="form-label">
+            Latitude
+          </label>
           <input
+            className="form-control"
             id="latitude"
             type="number"
             name="latitude"

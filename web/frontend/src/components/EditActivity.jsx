@@ -55,13 +55,16 @@ const EditActivity = () => {
   }
 
   return (
-    <div>
-      <form onSubmit={handleSave}>
+    <div style={{ display: "flex", justifyContent: "left" }}>
+      <form onSubmit={handleSave} style={{ width: "400px" }}>
         <h1>Edit Activity</h1>
         {error && <p className="error">{error}</p>}
         <div className="mb-2">
-          <label htmlFor="dayOne">Day One</label>
+          <label htmlFor="dayOne" className="form-label">
+            Day One
+          </label>
           <textarea
+            className="form-control"
             id="dayOne"
             name="dayOne"
             value={activity.dayOne}
@@ -72,8 +75,11 @@ const EditActivity = () => {
           />
         </div>
         <div className="mb-2">
-          <label htmlFor="dayTwo">Day Two</label>
+          <label htmlFor="dayTwo" className="form-label">
+            Day Two
+          </label>
           <textarea
+            className="form-control"
             id="dayTwo"
             name="dayTwo"
             value={activity.dayTwo}
@@ -84,8 +90,11 @@ const EditActivity = () => {
           />
         </div>
         <div className="mb-2">
-          <label htmlFor="dayThree">Day Three</label>
+          <label htmlFor="dayThree" className="form-label">
+            Day Three
+          </label>
           <textarea
+            className="form-control"
             id="dayThree"
             name="dayThree"
             value={activity.dayThree}
@@ -96,8 +105,11 @@ const EditActivity = () => {
           />
         </div>
         <div className="mb-2">
-          <label htmlFor="dayFour">Day Four</label>
+          <label htmlFor="dayFour" className="form-label">
+            Day Four
+          </label>
           <textarea
+            className="form-control"
             id="dayFour"
             name="dayFour"
             value={activity.dayFour}
@@ -108,8 +120,11 @@ const EditActivity = () => {
           />
         </div>
         <div className="mb-2">
-          <label htmlFor="dayFive">Day Five</label>
+          <label htmlFor="dayFive" className="form-lable">
+            Day Five
+          </label>
           <textarea
+            className="form-control"
             id="dayFive"
             name="dayFive"
             value={activity.dayFive}
