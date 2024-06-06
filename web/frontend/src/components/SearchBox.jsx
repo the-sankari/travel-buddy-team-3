@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 
-const SearchBox = ({ handleSearch, setCityName, setTravelDates, lat, lon }) => {
+const SearchBox = ({ handleSearch, setCityName, setTravelDates }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
@@ -26,6 +25,26 @@ const SearchBox = ({ handleSearch, setCityName, setTravelDates, lat, lon }) => {
     }
   }, [checkIn]);
 
+  const handleDateChange = () => {
+    if (checkIn && checkOut) {
+      const start = new Date(checkIn);
+      const end = new Date(checkOut);
+
+      const travelDatesArray = [];
+      const currentDate = new Date(start);
+      while (currentDate <= end) {
+        travelDatesArray.push(new Date(currentDate).toISOString().slice(0, 10));
+        currentDate.setDate(currentDate.getDate() + 1);
+      }
+
+      setTravelDates(travelDatesArray);
+    }
+  };
+
+  useEffect(() => {
+    handleDateChange();
+  }, [checkIn, checkOut]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Sweet alert if the user didn't select any destination
@@ -41,23 +60,15 @@ const SearchBox = ({ handleSearch, setCityName, setTravelDates, lat, lon }) => {
     const start = new Date(checkIn);
     const end = new Date(checkOut);
 
-    if (isNaN(start.getTime()) || isNaN(end.getTime())) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Please select both start and end dates.",
-      });
-      return;
-    }
+    // if (isNaN(start.getTime()) || isNaN(end.getTime())) {
+    //   Swal.fire({
+    //     icon: "error",
+    //     title: "Oops...",
+    //     text: "Please select both start and end dates.",
+    //   });
+    //   return;
+    // }
 
-    const travelDatesArray = [];
-    const currentDate = new Date(start);
-    while (currentDate <= end) {
-      travelDatesArray.push(new Date(currentDate).toISOString().slice(0, 10));
-      currentDate.setDate(currentDate.getDate() + 1);
-    }
-
-    setTravelDates(travelDatesArray);
     setCityName(searchTerm);
 
     try {

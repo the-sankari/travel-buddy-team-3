@@ -32,7 +32,7 @@ const Itinerary = ({ travelDates }) => {
 
       generateDays();
     }
-  }, [checkIn, checkOut]);
+  }, [travelDates]);
 
   const handleAddActivity = (e) => {
     e.preventDefault();
