@@ -1,0 +1,41 @@
+.header{
+    background-color: #d86779;
+
+}
+
+.navbar-brand{
+    font-size: 2.5rem;
+    color: #fffff0;
+    position: relative;
+    transition: all .3s;
+}
+
+.navbar-brand:hover{
+    color: #fffff0;
+    opacity: .8;
+}
+
+.nav-container-local{
+    position: relative;
+    p{
+        position: absolute;
+        top: 78%;
+        left: 22%;
+        transform: translate(-50%, -50%);
+        font-size: 1rem;  
+        color: #444;
+        font-family: "Lato", sans-serif;
+    }
+}
+
+
+.nav-link{
+    font-size: 1.5rem;
+    color: #fffff0;
+    transition: all .3s;
+}
+
+.nav-link:hover{
+    color: #fffff0;
+    opacity: .8;
+}

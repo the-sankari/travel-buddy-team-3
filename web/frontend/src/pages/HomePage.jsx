@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import Guide from "../components/Guide";
 import CarouselCard from "../components/CarouselCard";
 import Hero from "../components/Hero";
+import { Link } from "react-router-dom";
+
 
 const HomePage = () => {
   return (

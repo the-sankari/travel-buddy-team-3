@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Hero = () => {
   return (
     <section className="homepage-hero component-index-1 bg-white">
@@ -6,7 +8,7 @@ const Hero = () => {
         <div className="hero-text">BBN: Be Back Never</div>
         <div className="hero-btns">
           <p className="hero-text-p">Want to know how?</p>
-          <button className="hero-btn-plan">get started</button>
+          <Link to="/planner" className="hero-btn-plan">get started</Link>
         </div>
       </div>
       <div className="hero-video--wrap">

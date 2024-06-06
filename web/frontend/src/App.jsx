@@ -133,6 +133,7 @@ const App = () => {
   }, [error]);
 
   const routes = [
+    { path: "/", element: <HomePage /> },
     {
       path: "/",
       element: <Root />,
