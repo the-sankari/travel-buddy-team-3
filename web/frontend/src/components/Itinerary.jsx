@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
 
-const Itinerary = ({ travelDates }) => {
+const Itinerary = ({ travelDates, setFormattedActivities }) => {
   const location = useLocation();
   // const { checkIn, checkOut } = location.state || {};
   const checkIn = travelDates[0];
@@ -44,6 +44,7 @@ const Itinerary = ({ travelDates }) => {
           : currentActivity,
       }));
       setCurrentActivity("");
+      handleChange();
     }
   };
 
@@ -55,33 +56,21 @@ const Itinerary = ({ travelDates }) => {
         .filter((item) => item !== activity)
         .join(", "),
     }));
+    handleChange();
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const formattedActivities = {
+  const handleChange = () => {
+    setFormattedActivities({
       dayOne: activities[days[0]?.toISOString().split("T")[0]] || null,
       dayTwo: activities[days[1]?.toISOString().split("T")[0]] || null,
       dayThree: activities[days[2]?.toISOString().split("T")[0]] || null,
       dayFour: activities[days[3]?.toISOString().split("T")[0]] || null,
       dayFive: activities[days[4]?.toISOString().split("T")[0]] || null,
-    };
-    console.log("Formatted Activities:", formattedActivities); // Debug log
-    axios
-      .post("http://localhost:8007/api/activities", formattedActivities)
-      .then((response) => {
-        console.log("Success:", response.data);
-        setActivities({});
-        setCurrentActivity("");
-        setDays([]);
-        setSelectedDay("");
-        navigate("/planner");
-      })
-      .catch((error) => console.error("Error:", error));
+    });
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form>
       <div>
         <label htmlFor="day">Select Day:</label>
         <select
@@ -134,9 +123,6 @@ const Itinerary = ({ travelDates }) => {
           </div>
         ) : null
       )}
-      <button className="btn btn-success btn-sm mt-2" type="submit">
-        Save
-      </button>
     </form>
   );
 };
