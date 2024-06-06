@@ -71,8 +71,6 @@ const TripPlanner = ({ initialCoords }) => {
               handleSearch={handleSearch}
               setCityName={setCityName}
               setTravelDates={setTravelDates}
-              lat={lat}
-              lon={lon}
             />
           </div>
           <div className="current-weather">
