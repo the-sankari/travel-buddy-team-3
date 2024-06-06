@@ -60,14 +60,14 @@ const SearchBox = ({ handleSearch, setCityName, setTravelDates }) => {
     const start = new Date(checkIn);
     const end = new Date(checkOut);
 
-    if (isNaN(start.getTime()) || isNaN(end.getTime())) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Please select both start and end dates.",
-      });
-      return;
-    }
+    // if (isNaN(start.getTime()) || isNaN(end.getTime())) {
+    //   Swal.fire({
+    //     icon: "error",
+    //     title: "Oops...",
+    //     text: "Please select both start and end dates.",
+    //   });
+    //   return;
+    // }
 
     setCityName(searchTerm);
 
