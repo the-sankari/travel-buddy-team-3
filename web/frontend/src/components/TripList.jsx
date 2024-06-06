@@ -84,7 +84,25 @@ const TripList = () => {
     //     </tbody>
     //   </table>
     // </div>
-    <div className="container">
+    <div className="container mt-3">
+      <div className="bg-light p-3 mb-4 rounded">
+        <div className="row">
+          <div className="col-md-2 d-flex justify-content-center align-items-center">
+            <img
+              src="https://via.placeholder.com/100"
+              className="rounded-circle"
+              alt="User Image"
+            />
+          </div>
+          <div className="col-md-10">
+            <h2>Hello, Susan!</h2>
+            <p>Username: susan340958</p>
+            {/* <p>Registered since: 01/06/2024</p> */}
+            <p>Location: Helsinki, Finland</p>
+            <p>Planned trips: {trips.length}</p>
+          </div>
+        </div>
+      </div>
       <h1 className="text-center">Your Saved Plans</h1>
       <div className="row justify-content-center">
         {trips.map((trip) => (
