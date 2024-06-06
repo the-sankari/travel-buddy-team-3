@@ -28,7 +28,7 @@ class MapController extends AbstractController
         $cityName = $requestData['cityName'];
 
         // Fetch coordinates from Mapbox Geocoding API
-        $url = "https://api.mapbox.com/geocoding/v5/mapbox.places/{$cityName}.json?access_token={$this->MAP_KEY}";
+        $url = "https://api.mapbox.com/geocoding/v5/mapbox.places/{$cityName}.json?types=place&access_token={$this->MAP_KEY}";
 
         $response = $this->httpClient->request('GET', $url);
         $data = $response->toArray();
