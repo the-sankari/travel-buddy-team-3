@@ -1,0 +1,69 @@
+.container.contact-page {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  background-image: url('../images/onbeachwithphone.jpg');
+  background-size:100% 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #fff;
+  max-width: none;
+}
+
+.contact-page h1 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #fff;
+}
+
+.split-paragraph p {
+  text-align: center;
+  color: #ddd;
+}
+
+.card.contact-card {
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.3); 
+  color: #333;
+  width: 90%; 
+  /* max-width: 400px;  */
+  margin: 20px; /* Add margin */
+}
+
+.card.contact-card .card-body {
+  padding: 2rem;
+}
+
+.contact-card h2 {
+  color: #007bff;
+  margin-bottom: 1.5rem;
+}
+
+.contact-card p {
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.contact-card .form-label {
+  color: #555;
+}
+
+.contact-card .form-control {
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+.contact-card .btn {
+  background-color: #007bff;
+  border-color: #007bff;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.contact-card .btn:hover {
+  background-color: #0056b3;
+}
