@@ -15,7 +15,8 @@ Built with:
 - Symfony (for backend logic)
 - Mapbox GL JS (for interactive maps)
 - OpenWeatherMap API (for weather data)
-- RestCountries (for the country name, currency)
+- RestCountries (for the country names, languages and currencies)
+- Wikipedia (for city specific information)
 
 ## Setup and Usage
 
@@ -52,11 +53,10 @@ To get started with this project, follow these steps:
     ```
 
 6. **Access the application:**
-    Open your browser and navigate to `http://localhost:8000/map`.
-
+    Open your browser and navigate to `http://localhost:5173`.
 ## Live Page
 
-You can view the live project here: [Live Page](http://.....com)
+You can view the live project here: 
 
 ## Screenshot
 
@@ -78,4 +78,3 @@ You can view the live project here: [Live Page](http://.....com)
 - **Bishnu Suyel**
 - GitHub: [@Bis10](https://github.com/Bis10)
   
-## Licences
