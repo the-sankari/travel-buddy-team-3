@@ -1,6 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap');
 body {
-  font-family: "Roboto", sans-serif;
+  /* font-family: "Roboto", sans-serif; */
+  font-family: "Poetsen One", sans-serif;
+
 }
 
 * {
@@ -146,14 +149,14 @@ body {
   }
   h1 {
     font-size: 2.3rem;
-    font-family: "Roboto", sans-serif;
+    /* font-family: "Roboto", sans-serif; */
     font-weight: 700;
     font-style: normal;
     padding-top: 20px;
     margin-left: 10px;
     p {
       font-size: 0.4rem;
-      font-family: "Major Mono Display", monospace;
+      /* font-family: "Major Mono Display", monospace; */
       font-weight: 400;
     }
   }
@@ -176,7 +179,7 @@ body {
   }
   .nav-link {
     font-size: 1.5rem;
-    font-family: "Roboto", sans-serif;
+    /* font-family: "Roboto", sans-serif; */
   }
 }
 
@@ -199,4 +202,67 @@ body {
   img {
     width: 100px;
   }
+}
+
+/* Hero page */
+.homepage-hero {
+  position: relative;
+  /* width: 100vw; */
+  /* height: 100vh; */
+  .hero-video--wrap {
+    width: 100%;
+    height: 100%;
+    video {
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      margin: 0;
+    }
+  }
+}
+
+.hero-video--overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .hero-text {
+    color: #fff;
+    font-size: 15rem;
+    font-weight: bold;
+    text-align: center;
+  }
+}
+
+.hero-btns{
+z-index: 10;
+  button{
+    margin: 10px;
+    padding: 14px 24px;
+    min-width: 200px;
+    min-height: 60px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    transition: all .3s;
+    cursor: pointer;
+  }
+  button:hover{
+    background-color: #333;
+    color: #fff;
+
+  }
+}
+
+
+.hero-text-p{
+  font-size: 2rem;
+  color: #fff;
 }
