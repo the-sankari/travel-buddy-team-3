@@ -4,6 +4,7 @@ import Itinerary from "../components/Itinerary";
 import DestinationCard from "../components/DestinationCard";
 import Forecast from "../components/Forecast";
 import CurrentWeatherCard from "../components/CurrentWeatherCard";
+import SavePlanButton from "../components/SavePlanButton";
 
 const TripPlanner = ({ initialCoords }) => {
   const [cityName, setCityName] = useState(null);
@@ -87,6 +88,13 @@ const TripPlanner = ({ initialCoords }) => {
           <h4>Itinerary Planner</h4>
           <Itinerary travelDates={travelDates} />
         </div>
+        <SavePlanButton
+          destination={displayedCityName}
+          checkIn={travelDates[0]}
+          checkOut={travelDates[travelDates.length - 1]}
+          longitude={lon}
+          latitude={lat}
+        />
       </div>
       <div className="destination-card">
         <DestinationCard
