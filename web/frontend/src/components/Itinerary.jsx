@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
 
-const Itinerary = () => {
+const Itinerary = ({ travelDates }) => {
   const location = useLocation();
-  const { checkIn, checkOut } = location.state || {};
+  // const { checkIn, checkOut } = location.state || {};
+  const checkIn = travelDates[0];
+  const checkOut = travelDates[travelDates.length - 1];
   const [activities, setActivities] = useState({});
   const [currentActivity, setCurrentActivity] = useState("");
   const [selectedDay, setSelectedDay] = useState("");

@@ -61,23 +61,12 @@ const SearchBox = ({ handleSearch, setCityName, setTravelDates, lat, lon }) => {
     setCityName(searchTerm);
 
     try {
-      const response = await axios.post("http://localhost:8007/api/trips", {
-        destination: searchTerm,
-        checkIn: checkIn,
-        checkOut: checkOut,
-        longitude: lon,
-        latitude: lat,
-      });
-      console.log(response.data);
-      handleSearch(searchTerm); // Move this inside the try block
+      handleSearch(searchTerm);
     } catch (error) {
       console.error("There was an error creating the trip!", error);
     }
-
-    navigate("/planner", {
-      state: { checkIn, checkOut, longitude: lon, latitude: lat },
-    });
   };
+
   // calculates the maximum allowed check-out date based on the selected check-in date
   const getMaxCheckOutDate = () => {
     if (checkIn) {
@@ -88,7 +77,7 @@ const SearchBox = ({ handleSearch, setCityName, setTravelDates, lat, lon }) => {
     }
     return "";
   };
-// This function didn't allow user to select checkIn day earlier than the current day.
+  // This function didn't allow user to select checkIn day earlier than the current day.
   const getTodayDate = () => {
     const today = new Date();
     return today.toISOString().split("T")[0];
