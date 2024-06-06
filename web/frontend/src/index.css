@@ -44,11 +44,6 @@ body {
   text-align: center;
 }
 
-/* Search Box Component  */
-/* .search-container {
-  min-width: 40%;
-} */
-
 /* Trip Planner */
 
 .trip-planner {
@@ -121,7 +116,7 @@ body {
   }
 }
 
-/* Coutry card  */
+/* Country card  */
 
 .country-details {
   padding: 20px;
@@ -136,52 +131,7 @@ body {
   }
 }
 
-/* Nav bar */
 
-.navbar-brand {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  img {
-    width: 70px;
-    height: 70px;
-  }
-  h1 {
-    font-size: 2.3rem;
-    /* font-family: "Roboto", sans-serif; */
-    font-weight: 700;
-    font-style: normal;
-    padding-top: 20px;
-    margin-left: 10px;
-    p {
-      font-size: 0.4rem;
-      /* font-family: "Major Mono Display", monospace; */
-      font-weight: 400;
-    }
-  }
-}
-
-.nav-container {
-  display: flex;
-  position: relative;
-  width: 100%;
-}
-
-#navbarSupportedContent {
-  flex: 1;
-  justify-self: end;
-  ul {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    padding-right: 5%;
-  }
-  .nav-link {
-    font-size: 1.5rem;
-    /* font-family: "Roboto", sans-serif; */
-  }
-}
 
 /* Forecast */
 
@@ -233,17 +183,32 @@ body {
   justify-content: center;
   align-items: center;
   .hero-text {
-    color: #fff;
+    /* background-color: #ffffff8f; */
+    color: #ffffff7e;
     font-size: 7vw;
     font-weight: bold;
     text-align: center;
+    margin: 0 auto;
+    padding: 10px;
+    width: 70%;
+    text-align: center;
+    /* mix-blend-mode:screen; */
   }
 }
 
 .hero-btns{
 z-index: 10;
-  button{
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+margin-top: 20px;
+  a{
     margin: 10px;
+    color: #111;
+    text-decoration: none;
+    background-color: #fffff04f;
+    text-align: center;
     padding: 14px 24px;
     min-width: 200px;
     min-height: 60px;
@@ -251,13 +216,13 @@ z-index: 10;
     border-radius: 5px;
     font-size: 1.5rem;
     font-weight: bold;
-    transition: all .3s;
+    transition: all .5s;
     cursor: pointer;
+    mix-blend-mode: screen;
   }
-  button:hover{
-    background-color: #333;
+  a:hover{
     color: #fff;
-
+    background-color: #111;
   }
 }
 
