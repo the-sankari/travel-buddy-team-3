@@ -109,6 +109,7 @@ const TripList = () => {
             {/* <p>Registered since: 01/06/2024</p> */}
             <p>Location: Helsinki, Finland</p>
             <p>Planned trips: {plannedTrips.length}</p>
+            <p>Completed trips: {pastTrips.length}</p>
           </div>
         </div>
       </div>
