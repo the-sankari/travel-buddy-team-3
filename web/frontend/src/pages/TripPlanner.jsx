@@ -16,6 +16,7 @@ const TripPlanner = ({ initialCoords }) => {
   const [timezone, setTimezone] = useState(null);
   const mapRef = useRef(null);
   const [travelDates, setTravelDates] = useState([]);
+  const [formattedActivities, setFormattedActivities] = useState({});
 
   const handleSearch = async (cityName) => {
     try {
@@ -84,7 +85,10 @@ const TripPlanner = ({ initialCoords }) => {
         </div>
         <div className="itinerary-planner">
           <h4>Itinerary Planner</h4>
-          <Itinerary travelDates={travelDates} />
+          <Itinerary
+            travelDates={travelDates}
+            setFormattedActivities={setFormattedActivities}
+          />
         </div>
         <SavePlanButton
           destination={displayedCityName}
@@ -92,6 +96,7 @@ const TripPlanner = ({ initialCoords }) => {
           checkOut={travelDates[travelDates.length - 1]}
           longitude={lon}
           latitude={lat}
+          formattedActivities={formattedActivities}
         />
       </div>
       <div className="destination-card">
