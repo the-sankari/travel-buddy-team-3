@@ -7,6 +7,7 @@ const SavePlanButton = ({
   checkOut,
   longitude,
   latitude,
+  formattedActivities,
 }) => {
   const navigate = useNavigate();
 
@@ -43,8 +44,14 @@ const SavePlanButton = ({
         );
       })
       .catch((error) => console.error("Error:", error));
-  };
 
+    axios
+      .post("http://localhost:8007/api/activities", formattedActivities)
+      .then((response) => {
+        console.log("Success:", response.data);
+      })
+      .catch((error) => console.error("Error:", error));
+  };
   return (
     <button
       onClick={handleSavePlan}
