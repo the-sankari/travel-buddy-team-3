@@ -44,7 +44,6 @@ const Itinerary = ({ travelDates, setFormattedActivities }) => {
           : currentActivity,
       }));
       setCurrentActivity("");
-      handleChange();
     }
   };
 
@@ -56,10 +55,9 @@ const Itinerary = ({ travelDates, setFormattedActivities }) => {
         .filter((item) => item !== activity)
         .join(", "),
     }));
-    handleChange();
   };
 
-  const handleChange = () => {
+  useEffect(() => {
     setFormattedActivities({
       dayOne: activities[days[0]?.toISOString().split("T")[0]] || null,
       dayTwo: activities[days[1]?.toISOString().split("T")[0]] || null,
@@ -67,7 +65,7 @@ const Itinerary = ({ travelDates, setFormattedActivities }) => {
       dayFour: activities[days[3]?.toISOString().split("T")[0]] || null,
       dayFive: activities[days[4]?.toISOString().split("T")[0]] || null,
     });
-  };
+  }, [activities, days, setFormattedActivities]);
 
   return (
     <form>
