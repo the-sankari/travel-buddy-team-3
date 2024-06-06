@@ -2,11 +2,13 @@
 import React, { useState } from "react";
 import Guide from "../components/Guide";
 import CarouselCard from "../components/CarouselCard";
+import Hero from "../components/Hero";
 
 const HomePage = () => {
   return (
     <>
-      <CarouselCard />
+      <Hero />
+      {/* <CarouselCard /> */}
       <Guide />
     </>
   );
