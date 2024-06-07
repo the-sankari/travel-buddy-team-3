@@ -93,7 +93,7 @@ const Itinerary = ({ travelDates, setFormattedActivities }) => {
         />
         <button
           onClick={handleAddActivity}
-          className="btn btn-primary btn-sm ml-2"
+          className="btn btn-success btn-sm ml-2"
         >
           Add
         </button>
@@ -102,18 +102,25 @@ const Itinerary = ({ travelDates, setFormattedActivities }) => {
         activities[day] ? (
           <div key={day}>
             <h3>{new Date(day).toDateString()}</h3>
-            <ol>
+
+            <ol className="list-group list-group-numbered">
               {activities[day]
                 .split(", ")
                 .filter((activity) => activity)
                 .map((activity, index) => (
-                  <li key={index}>
-                    {activity}
+                  <li
+                    key={index}
+                    className="list-group-item d-flex justify-content-between align-items-start"
+                  >
+                    <div className="ms-2 me-auto">
+                      <div className="fw-bold activity-title">{activity}</div>
+                    </div>
                     <button
+                      type="button"
+                      className="btn "
                       onClick={() => handleDeleteActivity(day, activity)}
-                      className="btn btn-danger btn-sm ml-2"
                     >
-                      Delete
+                      <span className="material-symbols-outlined">delete</span>
                     </button>
                   </li>
                 ))}
