@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap');
 @import "./assets/css/homePage.css";
 @import "./assets/css/tripPlanner.css";
+@import "./assets/css/trips.css";
 
 body,html, #root {
   font-family: "Roboto", sans-serif;
