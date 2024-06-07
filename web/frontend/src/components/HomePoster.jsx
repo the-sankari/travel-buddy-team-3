@@ -11,7 +11,7 @@ const HomePoster = () => {
        <Link to="/planner" className="hero-btn-plan">
           Plant Trip
         </Link>
-        <Link to="/planner" className="hero-btn-plan">
+        <Link to="/contact" className="hero-btn-plan">
           Learn more
         </Link>
        </div>

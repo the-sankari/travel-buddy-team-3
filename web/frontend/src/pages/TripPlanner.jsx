@@ -64,50 +64,52 @@ const TripPlanner = ({ initialCoords }) => {
   }, [lat, lon]);
 
   return (
-    <div className="container trip-planner">
-      <div className="left">
-        <div className="searchbox-current-weather">
-          <div className="searchbox-card">
-            <SearchBox
-              handleSearch={handleSearch}
-              setCityName={setCityName}
-              setTravelDates={setTravelDates}
+    <div className="trip-planner-container">
+      <div className="container trip-planner">
+        <div className="left">
+          <div className="searchbox-current-weather">
+            <div className="searchbox-card">
+              <SearchBox
+                handleSearch={handleSearch}
+                setCityName={setCityName}
+                setTravelDates={setTravelDates}
+              />
+            </div>
+            <div className="current-weather">
+              {currentWeather && (
+                <CurrentWeatherCard currentWeather={currentWeather} />
+              )}
+            </div>
+          </div>
+          <div className="weather-forecast">
+            {lat && lon && <Forecast lat={lat} lon={lon} />}
+          </div>
+          <div className="itinerary-planner">
+            <h4>Itinerary Planner</h4>
+            <Itinerary
+              travelDates={travelDates}
+              setFormattedActivities={setFormattedActivities}
             />
           </div>
-          <div className="current-weather">
-            {currentWeather && (
-              <CurrentWeatherCard currentWeather={currentWeather} />
-            )}
-          </div>
-        </div>
-        <div className="weather-forecast">
-          {lat && lon && <Forecast lat={lat} lon={lon} />}
-        </div>
-        <div className="itinerary-planner">
-          <h4>Itinerary Planner</h4>
-          <Itinerary
-            travelDates={travelDates}
-            setFormattedActivities={setFormattedActivities}
+          <SavePlanButton
+            destination={displayedCityName}
+            checkIn={travelDates[0]}
+            checkOut={travelDates[travelDates.length - 1]}
+            longitude={lon}
+            latitude={lat}
+            formattedActivities={formattedActivities}
           />
         </div>
-        <SavePlanButton
-          destination={displayedCityName}
-          checkIn={travelDates[0]}
-          checkOut={travelDates[travelDates.length - 1]}
-          longitude={lon}
-          latitude={lat}
-          formattedActivities={formattedActivities}
-        />
-      </div>
-      <div className="destination-card">
-        <DestinationCard
-          countryName={countryName}
-          displayedCityName={displayedCityName}
-          lat={lat}
-          lon={lon}
-          mapRef={mapRef}
-          timezone={timezone}
-        />
+        <div className="destination-card">
+          <DestinationCard
+            countryName={countryName}
+            displayedCityName={displayedCityName}
+            lat={lat}
+            lon={lon}
+            mapRef={mapRef}
+            timezone={timezone}
+          />
+        </div>
       </div>
     </div>
   );
