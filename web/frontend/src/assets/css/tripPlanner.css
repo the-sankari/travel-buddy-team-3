@@ -1,0 +1,119 @@
+/* Trip Planner */
+
+.trip-planner {
+  width: 100%;
+  height: 100%;
+  margin-bottom: 100px;
+  padding-bottom: 20px;
+  background-color: #b5b3ad;
+  display: flex;
+}
+.left {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px;
+  .searchbox-current-weather {
+    display: flex;
+    width: 100%;
+    min-height: 200px;
+    margin-top: 40px;
+    .searchbox-card {
+      flex: 3;
+      align-self: center;
+      justify-self: center;
+      background-color: #fffff0;
+      border-radius: 5px;
+      padding: 20px;
+    }
+    .current-weather {
+      flex: 1;
+      text-align: center;
+      color: #111;
+      width: 100%;
+      padding: 20px;
+      h5 {
+        font-size: 0.8rem;
+      }
+      img {
+        width: 50%;
+      }
+      p {
+        font-size: 0.8rem;
+        margin: 0;
+      }
+    }
+  }
+}
+
+.weather-forecast,
+.itinerary-planner {
+  width: 100%;
+  padding: 10px;
+  background-color: #fffff0;
+  margin: 20px;
+  border-radius: 5px;
+  img {
+    width: 100%;
+  }
+}
+
+/* Destination card */
+.destination-card {
+  width: 50%;
+  /* height: 100vh; */
+  padding: 20px;
+display: flex;
+flex-direction: column;
+  .mapboxgl-canvas-container {
+    width: 100%;
+    canvas.mapboxgl-canvas {
+      width: 100%;
+    }
+  }
+}
+
+/* Country card  */
+
+.country-details {
+  padding: 20px;
+  background-color: #d9d9d9;
+  .country-data_item_1 {
+    display: flex;
+    gap: 10px;
+  }
+  .country-data_item_2 {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+/* Forecast */
+
+.forecast-container {
+  width: 100%;
+  height: 10%;
+  display: flex;
+  flex-direction: column;
+}
+
+.daily-forecast {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.forecast-card {
+  width: 120px;
+  border: none;
+  img {
+    width: 100px;
+  }
+}
+
+
+.activity-title{
+    font-size: 1.4rem;
+}

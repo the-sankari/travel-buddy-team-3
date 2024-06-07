@@ -12,8 +12,7 @@ const CurrentWeatherCard = ({ currentWeather }) => {
   const dayname = today.toLocaleDateString("en-US", { weekday: "short" });
 
   return (
-    // <div className="current-weather-container">
-    <>
+    <div>
       <h5>Current Weather</h5>
       <p>{dayname}</p>
       <img
@@ -24,9 +23,7 @@ const CurrentWeatherCard = ({ currentWeather }) => {
         {Math.round(currentWeather.main.temp)} °C,{" "}
         {currentWeather.weather[0].description}
       </p>
-      {/* <p>Humidity: {currentWeather.main.humidity} %</p> */}
-      {/* // </div> */}
-    </>
+    </div>
   );
 };
 
