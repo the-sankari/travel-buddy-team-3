@@ -55,7 +55,7 @@ const SavePlanButton = ({
   return (
     <button
       onClick={handleSavePlan}
-      className="btn btn-success btn-sm btn-position w-100"
+      className="btn btn-success btn-sm btn-position w-100 mb-2"
     >
       Save Plan
     </button>
