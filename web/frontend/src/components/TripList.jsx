@@ -50,139 +50,98 @@ const TripList = () => {
   );
 
   return (
-    // <div>
-    //   <h1 className="text-center">Journey List</h1>
-    //   <Link to="/addTrip">
-    //     <button className="btn btn-success btn-sm btn-position">NewTrip</button>
-    //   </Link>
-    //   <table className="table table-borderless">
-    //     <thead className="table-light">
-    //       <tr className="align-bottom">
-    //         <th>Destination</th>
-    //         <th>Check In</th>
-    //         <th>Check Out</th>
-    //         <th>Longitude</th>
-    //         <th>Latitude</th>
-    //         <th>Actions</th>
-    //       </tr>
-    //     </thead>
-    //     <tbody className="custom-position">
-    //       {trips.map((trip) => (
-    //         <tr className="align-middle" key={trip.id}>
-    //           <td>{trip.destination}</td>
-    //           <td>{trip.checkIn}</td>
-    //           <td>{trip.checkOut}</td>
-    //           <td>{trip.longitude}</td>
-    //           <td>{trip.latitude}</td>
-    //           <td className="d-flex gap-1">
-    //             <Link to={`/trips/${trip.id}`}>
-    //               <button className="btn btn-primary btn-sm">View</button>
-    //             </Link>
-    //             <Link to={`/edit/${trip.id}`}>
-    //               <button className="btn btn-success btn-sm">Edit</button>
-    //             </Link>
-    //             <button
-    //               className="btn btn-danger btn-sm"
-    //               onClick={() => handleDelete(trip.id)}
-    //             >
-    //               Delete
-    //             </button>
-    //           </td>
-    //         </tr>
-    //       ))}
-    //     </tbody>
-    //   </table>
-    // </div>
-    <div className="container mt-3">
-      <div className="bg-light p-3 mb-4 rounded">
-        <div className="row">
-          <div className="col-md-2 d-flex justify-content-center align-items-center">
-            <img
-              src="https://via.placeholder.com/100"
-              className="rounded-circle"
-              alt="User Image"
-            />
-          </div>
-          <div className="col-md-10">
-            <h2>Hello, Susan!</h2>
-            <p>Username: susan340958</p>
-            {/* <p>Registered since: 01/06/2024</p> */}
-            <p>Location: Helsinki, Finland</p>
-            <p>Planned trips: {plannedTrips.length}</p>
-            <p>Completed trips: {pastTrips.length}</p>
+    <div className="trips-container">
+      <div className="container">
+        <div className="bg-light p-3 mb-4 rounded">
+          <div className="row user-details">
+            <div className="col-md-2 d-flex justify-content-center align-items-center">
+              <img
+                src="https://via.placeholder.com/100"
+                className="rounded-circle"
+                alt="User Image"
+              />
+            </div>
+            <div className="col-md-10 ">
+              <h2>Hello, Susan!</h2>
+              <p>Username: susan340958</p>
+              {/* <p>Registered since: 01/06/2024</p> */}
+              <p>Location: Helsinki, Finland</p>
+              <p>Planned trips: {plannedTrips.length}</p>
+              <p>Completed trips: {pastTrips.length}</p>
+            </div>
           </div>
         </div>
-      </div>
-      <h1 className="text-center">Your Saved Plans:</h1>
-      <div className="row justify-content-center">
-        {plannedTrips.map((trip) => (
-          <div
-            key={trip.id}
-            className="col-md-10 bg-light p-3 mb-3"
-            style={{ borderRadius: "8px" }}
-          >
-            <div className="d-flex justify-content-between align-items-start">
-              <div>
-                <h2>{trip.destination}</h2>
-                <p>
-                  From {trip.checkIn} to {trip.checkOut}
-                </p>
-              </div>
-              <div
-                className="d-flex flex-column ml-auto"
-                style={{ width: "100px" }}
-              >
-                <Link to={`/edit/${trip.id}`}>
-                  <button className="btn btn-success btn-sm mb-2 w-100">
-                    Edit
-                  </button>
-                </Link>
-                <button
-                  className="btn btn-danger btn-sm w-100"
-                  onClick={() => handleDelete(trip.id)}
+        <h1 className="text-center">Your Saved Plans:</h1>
+        <div className="row justify-content-center">
+          {plannedTrips.map((trip) => (
+            <div
+              key={trip.id}
+              className="col-md-10 bg-light p-3 mb-3"
+              style={{ borderRadius: "8px" }}
+            >
+              <div className="d-flex justify-content-between align-items-start">
+                <div>
+                  <h2>{trip.destination}</h2>
+                  <p>
+                    From {trip.checkIn} to {trip.checkOut}
+                  </p>
+                </div>
+                <div
+                  className="d-flex flex-column ml-auto"
+                  style={{ width: "100px" }}
                 >
-                  Delete
-                </button>
+                  <Link to={`/edit/${trip.id}`}>
+                    <button className="btn btn-success btn-sm mb-2 w-100">
+                      Edit
+                    </button>
+                  </Link>
+                  <button
+                    className="btn btn-danger btn-sm w-100"
+                    onClick={() => handleDelete(trip.id)}
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
 
-      <h1 className="text-center">Your Past Journeys:</h1>
-      <div className="row justify-content-center">
-        {pastTrips.map((trip) => (
-          <div
-            key={trip.id}
-            className="col-md-10 bg-light p-3 mb-3"
-            style={{ borderRadius: "8px" }}
-          >
-            <div className="d-flex justify-content-between align-items-start">
-              <div>
-                <h2>{trip.destination}</h2>
-                <p>
-                  From {trip.checkIn} to {trip.checkOut}
-                </p>
-              </div>
-              <div
-                className="d-flex flex-column ml-auto"
-                style={{ width: "100px" }}
-              >
-                <Link to={`/edit/${trip.id}`}>
-                  <button className="btn btn-success btn-sm mb-2 w-100">
-                    Edit
-                  </button>
-                </Link>
-                <button
-                  className="btn btn-danger btn-sm w-100"
-                  onClick={() => handleDelete(trip.id)}
+        <h1 className="text-center">Your Past Journeys:</h1>
+        <div className="row justify-content-center">
+          {pastTrips.map((trip) => (
+            <div
+              key={trip.id}
+              className="col-md-10 bg-light p-3 mb-3"
+              style={{ borderRadius: "8px" }}
+            >
+              <div className="d-flex justify-content-between align-items-start">
+                <div>
+                  <h2>{trip.destination}</h2>
+                  <p>
+                    From {trip.checkIn} to {trip.checkOut}
+                  </p>
+                </div>
+                <div
+                  className="d-flex flex-column ml-auto"
+                  style={{ width: "100px" }}
                 >
-                  Delete
-                </button>
+                  <Link to={`/edit/${trip.id}`}>
+                    <button className="btn btn-success btn-sm mb-2 w-100">
+                      Edit
+                    </button>
+                  </Link>
+                  <button
+                    className="btn btn-danger btn-sm w-100"
+                    onClick={() => handleDelete(trip.id)}
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );

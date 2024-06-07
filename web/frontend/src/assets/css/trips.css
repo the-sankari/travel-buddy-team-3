@@ -1,0 +1,17 @@
+.trips-container {
+  width: 100%;
+  height: 100vh;
+  background-color: #69747c;
+  padding-top: 30px;
+}
+
+.trips {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .row {
+    width: 700px;
+    padding: 20px;
+    text-align: center;
+  }
+}
