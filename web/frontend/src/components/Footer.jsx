@@ -1,5 +1,11 @@
-const Footer = () => {
-  return <footer>&copy;2024</footer>;
-};
+import React from 'react'
 
-export default Footer;
+const Footer = () => {
+  return (
+    <footer className='footer'>
+      <p>copyright &copy; team-3, summer project</p>
+    </footer>
+  )
+}
+
+export default Footer

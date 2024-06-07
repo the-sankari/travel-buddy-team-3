@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
-    <section className="homepage-hero component-index-1 bg-white">
+    <section className="homepage-hero">
       <style>{/* CSS styles */}</style>
-      <div className="hero-video--overlay behave-as-bg">
+      <div className="hero-video--overlay ">
         <div className="hero-text">Explore the World</div>
         <div className="hero-btns">
           <p className="hero-text-p">Want to know how?</p>
